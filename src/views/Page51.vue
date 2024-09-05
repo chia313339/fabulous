@@ -61,7 +61,7 @@
               <video src="/img/p51/窗框補強.mp4" class="centered-video" style="max-height: 50vh; top:18%; left:45%;" controls autoplay loop></video>
             </div>
             <div  v-if="selectedItem === '樓板開口補強'">
-              <video src="/img/p51/樓板角隅補強.mp4" class="centered-video" style="max-height: 50vh; top:20%; left:35%;" controls autoplay loop></video>
+              <video src="/img/p51/樓板開口補強.webm" class="centered-video" style="max-height: 50vh; top:20%; left:35%;" controls autoplay loop></video>
             </div>
           </div>
 
