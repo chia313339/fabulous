@@ -5,6 +5,8 @@
         <source src="/img/theme.mp4" type="video/mp4">
         您的瀏覽器不支援影片播放
       </video>
+      <!-- SKIP 按鈕 -->
+      <button class="skip-button" @click="skipVideo">SKIP</button>
     </div>
     <div v-else>
       <div v-if="isSmallScreen" class="overlay">
@@ -53,6 +55,10 @@ export default {
       setTimeout(() => {
         this.$router.push('/page11'); // 跳转到下一个页面
       }, 1000); // 等待动画完成后跳转
+    },
+    skipVideo() {
+      this.isVideoPlaying = false;
+      this.$refs.introVideo.pause(); // 停止播放影片
     }
   },
   beforeDestroy() {
@@ -144,5 +150,25 @@ export default {
   border-left: 0.8rem solid transparent;
   border-right: 0.8rem solid transparent;
   border-top: 2rem solid white;
+}
+
+/* 新增的 SKIP 按鈕樣式 */
+.skip-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 1100;
+  border-radius: 5px;
+}
+
+.skip-button:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
 }
 </style>

@@ -2,33 +2,18 @@
   <div class="fullwidthbanner-container">
   <div class="tag-box">
       <div class="tag">
-      <b>山水之居 &nbsp;&nbsp; | &nbsp;&nbsp; <span>空拍 / </span>&nbsp;<span>公園 / </span>&nbsp;<span>河景 / </span>&nbsp;<span>捷運 / </span></b>
+      <b>山水之居 &nbsp;&nbsp; | &nbsp;&nbsp; 
+        <a><span @click="selectItem('001')" :class="{ active: selectedItem === '001' }"> 空拍 / </span></a>&nbsp;
+        <a><span @click="selectItem('002')" :class="{ active: selectedItem === '002' }"> 公園 / </span> </a>&nbsp;
+        <a><span @click="selectItem('003')" :class="{ active: selectedItem === '003' }"> 河景 / </span></a>&nbsp;
+        <a><span @click="selectItem('004')" :class="{ active: selectedItem === '004' }"> 捷運 / </span></a></b>
       </div>
   </div>
-  <div id="carouselExample" class="carousel slide content d-flex align-items-center justify-content-center" data-bs-ride="carousel">
-      <div class="carousel-inner">
-      <div class="carousel-item active">
-          <img src="/img/p12/001.png" class="d-block w-100 carousel-img" alt="圖片1">
-          <button v-if="showButton" class="centered-button" @click="openModal">空拍大景</button>
-      </div>
-      <div class="carousel-item">
-          <img src="/img/p12/002.png" class="d-block w-100 carousel-img" alt="圖片2">
-      </div>
-      <div class="carousel-item">
-          <img src="/img/p12/003.png" class="d-block w-100 carousel-img" alt="圖片3">
-      </div>
-      <div class="carousel-item">
-          <img src="/img/p12/004.png" class="d-block w-100 carousel-img" alt="圖片4">
-      </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-      </button>
+  <div class="content">
+    <div>
+      <img :src="getImageSrc(selectedItem)" alt="Selected Image" class="d-block w-100 carousel-img" :key="selectedItem">
+      <button v-if="selectedItem === '001'" class="centered-button" @click="openModal">空拍大景</button>
+    </div>
   </div>
   </div>
 </template>
@@ -43,6 +28,20 @@ export default {
 setup() {
   const carouselRef = ref(null);
   const showButton = ref(true);
+  const selectedItem = ref(''); // 保存當前選中的項目
+
+  // 設置預設為第一個選項 '空拍'
+  onMounted(() => {
+      selectedItem.value = '001';
+    });
+
+  const selectItem = (item) => {
+      selectedItem.value = item;
+    };
+
+  const getImageSrc = (item) => {
+      return `/img/p12/${item}.png`; // 根據選項返回對應的圖片路徑
+    };
 
   const initCarousel = () => {
     nextTick(() => {
@@ -131,7 +130,10 @@ setup() {
 
   return {
     openModal,
-    showButton
+    showButton,
+    selectedItem,
+    selectItem,
+    getImageSrc
   };
 }
 };
@@ -183,19 +185,13 @@ setup() {
   }
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  background-color: rgba(141, 141, 141, 0.5); /* 白色半透明背景 */
-  border-radius: 50%; /* 圆形背景 */
-  padding: 10px; /* 内边距，让icon在背景中更居中 */
+span{
+  color: #666666;
 }
 
-.carousel-control-prev,
-.carousel-control-next {
-  top: 50%; /* 垂直居中 */
-  transform: translateY(-50%);
-  width: 50px; /* 控制按钮大小 */
-  height: 50px; /* 控制按钮大小 */
+span:hover, .active {
+  color: #ffffff;
+  font-weight: bold;
 }
 
 

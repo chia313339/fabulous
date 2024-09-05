@@ -31,7 +31,7 @@
 
 <script>
 import { onMounted, nextTick, onBeforeUnmount, ref } from 'vue';
-import { onBeforeRouteUpdate } from 'vue-router';
+import { onBeforeRouteLeave } from 'vue-router';
 import { Carousel } from 'bootstrap';
 
 export default {
@@ -58,7 +58,7 @@ export default {
               interval: 5000,
               wrap: true
             });
-            carouselRef.value.to(0);
+            carouselRef.value.to(0); // Always start from the first slide
           } catch (error) {
             console.error('Error initializing carousel:', error);
           }
@@ -74,11 +74,10 @@ export default {
       });
     });
 
-    onBeforeRouteUpdate((to, from, next) => {
-      nextTick(() => {
-        initCarousel();
-      });
-      next();
+    onBeforeRouteLeave((to, from) => {
+      if (carouselRef.value) {
+        carouselRef.value.to(0); // Reset to first slide when leaving the route
+      }
     });
 
     onBeforeUnmount(() => {
@@ -94,35 +93,33 @@ export default {
 
 <style scoped>
 .content {
-  height: 100vh; 
+  height: 100vh;
   width: 95vw;
   display: flex;
-  align-items: center; /* 垂直居中 */
-  justify-content: center; /* 水平居中 */
-  overflow: hidden; /* 防止图片超出容器 */
-  opacity: 0; /* 初始状态透明 */
-  transition: opacity 2s ease-in-out; /* 淡入效果 */
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
 }
 
 .carousel-item img {
-  max-width: 100%; /* 确保图片宽度不超过容器 */
-  max-height: 100%; /* 确保图片高度不超过容器 */
-  object-fit: contain; /* 让图片在容器内保持比例缩放 */
-  margin: 0 auto; /* 图片居中显示 */
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  margin: 0 auto;
 }
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  background-color: rgba(141, 141, 141, 0.5); /* 白色半透明背景 */
-  border-radius: 50%; /* 圆形背景 */
-  padding: 10px; /* 内边距，让icon在背景中更居中 */
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-color: rgba(141, 141, 141, 0.5);
+  border-radius: 50%;
+  padding: 10px;
 }
 
-.carousel-control-prev,
-.carousel-control-next {
-  top: 50%; /* 垂直居中 */
+.carousel-control-prev, .carousel-control-next {
+  top: 50%;
   transform: translateY(-50%);
-  width: 50px; /* 控制按钮大小 */
-  height: 50px; /* 控制按钮大小 */
+  width: 50px;
+  height: 50px;
 }
 </style>

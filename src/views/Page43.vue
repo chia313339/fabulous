@@ -47,14 +47,31 @@
         </transition>
       </div>
       <div class="floor">
-        <span 
-          v-for="floor in floors" 
-          :key="floor" 
-          :class="{ active: selectedFloor === floor }" 
-          @click="selectFloor(floor)"
-        >
-          {{ floor }}
-        </span>
+        <span :class="{ active: selectedFloor === 'B4' }" @click="selectFloor('B4')">B4</span>
+        <span :class="{ active: selectedFloor === 'B3' }" @click="selectFloor('B3')">B3</span>
+        <span :class="{ active: selectedFloor === 'B2' }" @click="selectFloor('B2')">B2</span>
+        <span :class="{ active: selectedFloor === 'B1_1F' }" @click="selectFloor('B1_1F')">B1_1F</span>
+        <span :class="{ active: selectedFloor === '1F_2F' }" @click="selectFloor('1F_2F')">1F_2F</span>
+        <span :class="{ active: selectedFloor === '3F' }" @click="selectFloor('3F')">3F</span>
+        <span :class="{ active: selectedFloor === '4F' }" @click="selectFloor('4F')">4F</span>
+        <span :class="{ active: selectedFloor === '5F' }" @click="selectFloor('5F')">5F</span>
+        <span :class="{ active: selectedFloor === '6F' }" @click="selectFloor('6F')">6F</span>
+        <span :class="{ active: selectedFloor === '7F' }" @click="selectFloor('7F')">7F</span>
+        <span :class="{ active: selectedFloor === '8F' }" @click="selectFloor('8F')">8F</span>
+        <span :class="{ active: selectedFloor === '9F' }" @click="selectFloor('9F')">9F</span>
+        <span :class="{ active: selectedFloor === '10F' }" @click="selectFloor('10F')">10F</span>
+        <span :class="{ active: selectedFloor === '11F' }" @click="selectFloor('11F')">11F</span>
+        <span :class="{ active: selectedFloor === '12F' }" @click="selectFloor('12F')">12F</span>
+        <span :class="{ active: selectedFloor === '13F' }" @click="selectFloor('13F')">13F</span>
+        <span :class="{ active: selectedFloor === '14F' }" @click="selectFloor('14F')">14F</span>
+        <span :class="{ active: selectedFloor === '15F' }" @click="selectFloor('15F')">15F</span>
+        <span :class="{ active: selectedFloor === '16F' }" @click="selectFloor('16F')">16F</span>
+        <span :class="{ active: selectedFloor === '17F' }" @click="selectFloor('17F')">17F</span>
+        <span :class="{ active: selectedFloor === '18F' }" @click="selectFloor('18F')">18F</span>
+        <span :class="{ active: selectedFloor === '19F' }" @click="selectFloor('19F')">19F</span>
+        <span :class="{ active: selectedFloor === '20F' }" @click="selectFloor('20F')">20F</span>
+        <span :class="{ active: selectedFloor === '21F' }" @click="selectFloor('21F')">21F</span>
+        <span :class="{ active: selectedFloor === '22F' }" @click="selectFloor('22F')">22F</span>
       </div>
     </div>
   </div>
@@ -104,8 +121,21 @@ export default {
         showCloseButton: true,
         showConfirmButton: false,
         focusConfirm: false,
+        width: '80vw',  // 设置 modal 宽度为视窗宽度的 90%
+        customClass: {
+          image: 'custom-image' // 自定义类名
+        },
+        didOpen: () => {
+          const img = document.querySelector('.swal2-image');
+          if (img) {
+            img.style.maxHeight = '80vh';
+            img.style.maxWidth = 'auto';  // 保持图片的宽度比例
+            img.style.objectFit = 'contain'; // 保持图片宽高比
+          }
+        }
       });
     };
+
 
     const initContent = () => {
       nextTick(() => {
@@ -195,8 +225,9 @@ export default {
   display: flex;
   justify-content: center;
   gap: 5px;
-  padding-bottom: 10%;
+  padding-bottom: 8%;
   background-color: rgba(255, 255, 255, 0.8);
+  flex-wrap: wrap; /* 允許換行 */
 }
 
 .floor span {
@@ -214,10 +245,21 @@ export default {
   background-color: #5B4341;
 }
 
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active {
   transition: opacity 1s ease-in-out;
 }
 .fade-enter-from, .fade-leave-to {
   opacity: 0;
 }
+
+.custom-image {
+  max-height: 80vh;   /* 最大高度 90vh */
+  max-width: 100%;    /* 保持图片宽度最大化 */
+  object-fit: contain; /* 保持图片宽高比 */
+}
+
+.swal2-popup {
+  max-width: 80vw !important; /* 强制设置弹出窗口的最大宽度 */
+}
+
 </style>

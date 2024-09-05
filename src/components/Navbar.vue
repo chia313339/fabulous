@@ -90,7 +90,7 @@ export default {
                         { label: '庭園規劃', link: '/page41' },
                         { label: '公設規劃', link: '/page42' },
                         { label: '平面規劃', link: '/page43' },
-                        { label: '空間特色', link: '/page44' },
+                        // { label: '空間特色', link: '/page44' },
                     ],
                 },
                 {
@@ -188,7 +188,7 @@ export default {
 
 .dropdown-menu .dropdown-item {
     display: inline-block;
-    font-size: 1.25vw; /* 調整下拉選單文字大小 */
+    font-size: 1vw; /* 調整下拉選單文字大小 */
     color: #786752; /* 平時顏色 */
     padding: 0 1rem; /* 每個subitem的內距 */
     position: relative;
@@ -224,7 +224,7 @@ export default {
 .dropdown-item:active {
     background-color: rgba(255, 255, 255, 0.0) !important; /* 設置白色半透明背景 */
     color: #030303 !important;
-    font-size: calc(1.25vw + 1px);
+    font-size: calc(1vw + 1px);
 }
 
 

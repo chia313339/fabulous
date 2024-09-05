@@ -94,13 +94,13 @@ export default {
       } else if (imageType === '12') {
         modalImageSrc.value = '/img/p13/12.png';
       } else {
-        modalImageSrc.value = '/img/p13/bigmap.webp';
+        modalImageSrc.value = '/img/p13/bigmap1.png';
       }
 
       Swal.fire({
         imageUrl: modalImageSrc.value,
         imageAlt: '大圖',
-        width: '90%',
+        width: 'auto',
         padding: 0,
         background: '#fff',
         showCloseButton: true,
@@ -221,8 +221,10 @@ export default {
   }
 
   .custom-modal-popup {
-  width: 100%; /* 覆蓋默認寬度 */
-  height: 100%; /* 設定高度為 90vh */
+  width: auto; /* 覆蓋默認寬度 */
+  height: auto; /* 設定高度為 90vh */
+  max-width: 90vw; /* 設定最大高度為 90vh */
+  max-height: 90vh; /* 設定最大高度為 90vh */
   padding: 0; /* 移除內邊距 */
   background-color: transparent; /* 背景設置為透明 */
   display: flex;
@@ -232,9 +234,9 @@ export default {
 }
 
 .custom-modal-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* 確保圖片覆蓋整個模態框，可能會裁剪 */
+  max-width: 100%; /* 圖片寬度最大100% */
+  max-height: 90vh; /* 圖片高度最大90vh */
+  object-fit: contain; /* 確保圖片覆蓋整個模態框，可能會裁剪 */
 }
   
   </style>

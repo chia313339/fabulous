@@ -6,20 +6,21 @@
       </div>
     </div>
     <div class="content">
-      <!-- 4張圖片，分別有超連結 -->
-      <a href="/page51">
-        <img src="/img/p50/001.png" alt="Image 1" class="image-item">
-      </a>
-      <a href="/page52">
-        <img src="/img/p50/002.png" alt="Image 2" class="image-item">
-      </a>
-      <a href="/page53">
-        <img src="/img/p50/003.png" alt="Image 3" class="image-item">
-      </a>
-      <a href="/page54">
-        <img src="/img/p50/004.png" alt="Image 4" class="image-item">
-      </a>
+        <!-- 4張圖片，使用router-link進行導航 -->
+        <router-link to="/page51">
+            <img src="/img/p50/001.png" alt="Image 1" class="image-item">
+        </router-link>
+        <router-link to="/page52">
+            <img src="/img/p50/002.png" alt="Image 2" class="image-item">
+        </router-link>
+        <router-link to="/page53">
+            <img src="/img/p50/003.png" alt="Image 3" class="image-item">
+        </router-link>
+        <router-link to="/page54">
+            <img src="/img/p50/004.png" alt="Image 4" class="image-item">
+        </router-link>
     </div>
+
   </div>
 </template>
 
@@ -52,13 +53,14 @@ export default {
   display: flex;
   justify-content: center; /* 水平置中 */
   align-items: center; /* 垂直置中 */
-  gap: 20px; /* 圖片之間的間距 */
+  gap: 1vw; /* 圖片之間的間距 */
   flex-wrap: wrap; /* 讓圖片自動換行，如果屏幕太小 */
   width: 100%; /* 讓內容寬度自適應 */
   height: auto;
   overflow: hidden;
   opacity: 0;
   transition: opacity 2s ease-in-out;
+  flex-wrap: nowrap; /* 禁止換行，強制所有圖片在同一列 */
 }
 
 .image-item {
