@@ -28,6 +28,25 @@
               <div class="circle-button" style="top: 54%; left: 75.5%;" @click="">A6</div>
               <div class="circle-button" style="top: 48%; left: 85%;" @click="">A7</div>
             </div>
+
+            <div class="11f"  v-if="is11f">
+              <div class="circle-button" style="top: 18%; left: 18%;" @click="">B1</div>
+              <div class="circle-button" style="top: 20%; left: 27%;" @click="">B2</div>
+              <div class="circle-button" style="top: 18%; left: 34.5%;" @click="">B3</div>
+              <div class="circle-button" style="top: 48%; left: 13%;" @click="">B7</div>
+              <div class="circle-button" style="top: 54%; left: 23%;" @click="">B6</div>
+              <div class="circle-button" style="top: 54%; left: 29%;" @click="">B5</div>
+              <div class="circle-button" style="top: 48%; left: 40%;" @click="">BB</div>
+
+              <div class="circle-button" style="top: 18%; left: 64%;" @click="showModal('/img/p43/a3_11f.png')">A3</div>
+              <div class="circle-button" style="top: 20%; left: 71%;" @click="showModal('/img/p43/a2_11f.png')">A2</div>
+              <div class="circle-button" style="top: 18%; left: 80%;" @click="">A1</div>
+              <div class="circle-button" style="top: 48%; left: 59%;" @click="showModal('/img/p43/aa_11f.png')">AA</div>
+              <div class="circle-button" style="top: 54%; left: 69.5%;" @click="showModal('/img/p43/a5_11f.png')">A5</div>
+              <div class="circle-button" style="top: 54%; left: 75.5%;" @click="">A6</div>
+              <div class="circle-button" style="top: 48%; left: 85%;" @click="">A7</div>
+            </div>
+
             <div class="19fup"  v-if="is19fup">
               <div class="circle-button" style="top: 18%; left: 25.5%;" @click="">B1</div>
               <div class="circle-button" style="top: 18%; left: 33%;" @click="">B2</div>
@@ -41,6 +60,22 @@
               <div class="circle-button" style="top: 49%; left: 60.5%;" @click="">A3</div>
               <div class="circle-button" style="top: 54%; left: 70%;" @click="">AA</div>
               <div class="circle-button" style="top: 54%; left: 75.5%;" @click="">A5</div>
+              <div class="circle-button" style="top: 49%; left: 86%;" @click="">A6</div>
+            </div>
+
+            <div class="is21f"  v-if="is21f">
+              <div class="circle-button" style="top: 18%; left: 25.5%;" @click="">B1</div>
+              <div class="circle-button" style="top: 18%; left: 33%;" @click="">B2</div>
+              <div class="circle-button" style="top: 49%; left: 16%;" @click="">B6</div>
+              <div class="circle-button" style="top: 54%; left: 26.5%;" @click="">B5</div>
+              <div class="circle-button" style="top: 54%; left: 31.5%;" @click="">BB</div>
+              <div class="circle-button" style="top: 49%; left: 42%;" @click="">B3</div>
+
+              <div class="circle-button" style="top: 18%; left: 70%;" @click="showModal('/img/p43/a2_21f.png')">A2</div>
+              <div class="circle-button" style="top: 18%; left: 76%;" @click="showModal('/img/p43/a1u.png')">A1</div>
+              <div class="circle-button" style="top: 49%; left: 60.5%;" @click="showModal('/img/p43/a3_21f.png')">A3</div>
+              <div class="circle-button" style="top: 54%; left: 70%;" @click="showModal('/img/p43/aa_21f.png')">AA</div>
+              <div class="circle-button" style="top: 54%; left: 75.5%;" @click="showModal('/img/p43/a5_21f.png')">A5</div>
               <div class="circle-button" style="top: 49%; left: 86%;" @click="">A6</div>
             </div>
           </div>
@@ -104,14 +139,29 @@ export default {
     // 計算屬性，檢查當前樓層是否在3F至18F範圍內，排除 B 開頭的樓層
     const isWithinSelectedFloors = computed(() => {
       const floorNum = getFloorNumber(selectedFloor.value);
-      return floorNum && floorNum >= 3 && floorNum <= 18;
+      const allowedFloors = [3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18];
+      return floorNum && allowedFloors.includes(floorNum);
     });
 
+    // 計算屬性，檢查當前樓層是否在3F至18F範圍內，排除 B 開頭的樓層
+    const is11f = computed(() => {
+      const floorNum = getFloorNumber(selectedFloor.value);
+      const allowedFloors = [11];
+      return floorNum && allowedFloors.includes(floorNum);
+    });
 
     // 計算屬性，檢查當前樓層是否在19F以上
     const is19fup = computed(() => {
       const floorNum = getFloorNumber(selectedFloor.value);
-      return floorNum && floorNum >= 19;
+      const allowedFloors = [19, 20, 22];
+      return floorNum && allowedFloors.includes(floorNum);
+    });
+
+    // 計算屬性，檢查當前樓層是否在19F以上
+    const is21f = computed(() => {
+      const floorNum = getFloorNumber(selectedFloor.value);
+      const allowedFloors = [21];
+      return floorNum && allowedFloors.includes(floorNum);
     });
 
     const showModal = (imageUrl) => {
@@ -159,6 +209,8 @@ export default {
       showModal,
       isWithinSelectedFloors,
       is19fup,
+      is11f,
+      is21f,
     };
   }
 };
