@@ -56,7 +56,7 @@
                   <div class="carousel-item">
                     <img src="/img/p54/櫃體002.png" class="d-block w-100" alt="...">
                   </div>
-                  <div class="carousel-item">
+                  <!-- <div class="carousel-item">
                     <img src="/img/p54/櫃體003.png" class="d-block w-100" alt="...">
                   </div>
                   <div class="carousel-item">
@@ -82,7 +82,7 @@
                   </div>
                   <div class="carousel-item">
                     <img src="/img/p54/櫃體011.png" class="d-block w-100" alt="...">
-                  </div>
+                  </div> -->
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>

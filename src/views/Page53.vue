@@ -122,10 +122,13 @@
               <video src="/img/p53/給水管採不鏽鋼接頭.mp4" class="centered-video" style="max-height: 50vh; top:15%; left:44%;" autoplay loop></video>
             </div>
             <div  v-if="selectedItem === '雙水箱系統'">
-              <video src="/img/p53/雙水箱系統.mp4" class="centered-video" style="max-height: 50vh; top:15%; left:44%;" autoplay loop></video>
+              <video src="/img/p53/雙水箱系統.mp4" class="centered-video" style="max-height: 50vh; top:15%; left:43%;" autoplay loop></video>
             </div>
             <div  v-if="selectedItem === '地下室排風'">
               <video src="/img/p53/地下室排風.mp4" class="centered-video" style="max-height: 50vh; top:15%; left:38%;" autoplay loop></video>
+            </div>
+            <div  v-if="selectedItem === 'FTTH光纖到府'">
+              <video src="/img/p53/光纖網路.mp4" class="centered-video" style="max-height: 50vh; top:15%; left:45%;" autoplay loop></video>
             </div>
           </div>
         </transition>

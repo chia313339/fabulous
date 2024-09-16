@@ -27,13 +27,13 @@
           <div v-if="selectedItem" >
             <img :src="getImageSrc(selectedItem)" alt="Selected Image" class="centered-image" :key="selectedItem">
             <div  v-if="selectedItem === '浴室防水'">
-              <video src="/img/p52/浴室防水.mp4" class="centered-video" style="max-height: 40vh; top:20%; left:50%;" autoplay loop></video>
+              <video src="/img/p52/浴室防水.webm" class="centered-video" style="max-height: 40vh; top:20%; left:50%;" autoplay loop></video>
             </div>
             <div  v-if="selectedItem === '陽台防水'">
-              <video src="/img/p52/陽台防水.mp4" class="centered-video" style="max-height: 40vh; top:20%; left:50%;" autoplay loop></video>
+              <video src="/img/p52/陽台防水.webm" class="centered-video" style="max-height: 40vh; top:20%; left:50%;" autoplay loop></video>
             </div>
             <div  v-if="selectedItem === '屋頂防水'">
-              <video src="/img/p52/屋頂防水.mp4" class="centered-video" style="max-height: 40vh; top:22%; left:30%;" autoplay loop></video>
+              <video src="/img/p52/屋頂防水.webm" class="centered-video" style="max-height: 40vh; top:22%; left:30%;" autoplay loop></video>
             </div>
           </div>
 

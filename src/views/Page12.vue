@@ -15,6 +15,9 @@
         <img :src="getImageSrc(selectedItem)" alt="Selected Image" class="d-block w-100 carousel-img" :key="selectedItem">
         <button v-if="selectedItem === '001'" class="centered-button" @click="openModal">空拍大景</button>
       </div>
+      <div v-show="selectedItem === '001'"  class="cloud-image">
+        <img src="/img/p12/cloud.png" alt="Cloud Image" class="animated-cloud">
+      </div>
     </div>
   </div>
 </template>
@@ -34,6 +37,15 @@ export default {
     // 設置預設為第一個選項 '空拍'
     onMounted(() => {
       selectedItem.value = '001';
+      const cloudImage = document.querySelector('.cloud-image img');
+      if (cloudImage) {
+        cloudImage.style.opacity = 0;
+        cloudImage.style.transform = 'translateX(-100%)';
+        setTimeout(() => {
+          cloudImage.style.opacity = 1;
+          cloudImage.style.transform = 'translateX(0)';
+        }, 300);
+      }
     });
 
     const selectItem = (item) => {
@@ -240,6 +252,28 @@ span:hover, .active {
 
 .swal2-styled:not(.selected) {
   color: black; /* 未被選擇的按鈕文字為黑色 */
+}
+
+.tag-box{
+  position: absolute;
+  z-index: 99;
+}
+
+.cloud-image {
+  position: absolute;
+  top: -15%;
+  left: 25%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+}
+.animated-cloud {
+  width: 70vh; 
+  opacity: 0;
+  transition: opacity 2s ease, transform 3s ease;
 }
 
 </style>
