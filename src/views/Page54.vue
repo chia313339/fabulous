@@ -104,7 +104,8 @@
 
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
+import { Carousel } from 'bootstrap';  // 導入 Carousel 模組
 
 export default {
   setup() {
@@ -113,6 +114,18 @@ export default {
 
     onMounted(() => {
       selectedItem.value = '主浴'; // 預設選中的項目
+
+      nextTick(() => {
+        // 停止所有輪播功能
+        const carouselElements = document.querySelectorAll('.carousel');
+        carouselElements.forEach((carouselElement) => {
+          const carouselInstance = new Carousel(carouselElement, {
+            interval: false,  // 停止自動輪播
+            ride: false       // 禁止手動操作後重新啟動輪播
+          });
+          carouselInstance.pause();  // 強制停止輪播
+        });
+      });
     });
 
     const selectItem = (item, category) => {
@@ -132,6 +145,7 @@ export default {
     };
   }
 };
+
 </script>
 
 

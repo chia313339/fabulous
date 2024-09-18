@@ -138,7 +138,8 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick, watch } from 'vue';
+import { Carousel } from 'bootstrap';  // 導入 Carousel 模組
 
 export default {
   setup() {
@@ -146,8 +147,28 @@ export default {
     const selectedCategory = ref('隔音'); // 預設選中的類別
     const categories = ['隔音', '管線', '科技', '貼心']; // 左邊四個類別
 
+    const initCarousels = () => {
+      nextTick(() => {
+        // 停止所有輪播功能
+        const carouselElements = document.querySelectorAll('.carousel');
+        carouselElements.forEach((carouselElement) => {
+          const carouselInstance = new Carousel(carouselElement, {
+            interval: false,  // 停止自動輪播
+            ride: false       // 禁止手動操作後重新啟動輪播
+          });
+          carouselInstance.pause();  // 強制停止輪播
+        });
+      });
+    };
+
     onMounted(() => {
       selectedItem.value = '濕式輕隔間'; // 預設選中的項目
+      initCarousels(); // 初始化並停止輪播
+    });
+
+    // 每次切換 selectedItem 時重新初始化輪播
+    watch(selectedItem, () => {
+      initCarousels(); // 確保選擇不同項目時也停止輪播
     });
 
     const selectCategory = (category) => {
@@ -172,6 +193,8 @@ export default {
     };
   }
 };
+
+
 </script>
 
 <style scoped>

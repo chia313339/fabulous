@@ -56,26 +56,37 @@
   
   <script>
   import { onMounted, nextTick } from 'vue';
-  
-  export default {
-    setup() {
-      const initContent = () => {
-        nextTick(() => {
-          const content = document.querySelector('.content');
-          if (content) {
-            content.style.opacity = 0;
-            setTimeout(() => {
-              content.style.opacity = 1;
-            }, 100);
-          }
-        });
-      };
-  
-      onMounted(initContent);
-  
-      return {};
-    }
-  };
+import { Carousel } from 'bootstrap';  // 正確導入 Carousel 模組
+
+export default {
+  setup() {
+    const initContent = () => {
+      nextTick(() => {
+        const content = document.querySelector('.content');
+        if (content) {
+          content.style.opacity = 0;
+          setTimeout(() => {
+            content.style.opacity = 1;
+          }, 100);
+        }
+
+        // 停止輪播功能
+        const carouselElement = document.querySelector('#carouselExampleCaptions');
+        if (carouselElement) {
+          const carouselInstance = new Carousel(carouselElement, {
+            interval: false, // 停止自動輪播
+            ride: false      // 禁止手動操作後重新啟動輪播
+          });
+          carouselInstance.pause(); // 強制暫停輪播
+        }
+      });
+    };
+
+    onMounted(initContent);
+
+    return {};
+  }
+};
   </script>
   
   <style scoped>

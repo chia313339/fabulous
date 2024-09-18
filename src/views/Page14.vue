@@ -55,7 +55,7 @@
             }
             try {
               carouselRef.value = new Carousel(carouselElement, {
-                interval: 5000,
+                interval: 5000000,
                 wrap: true
               });
               carouselRef.value.to(0);

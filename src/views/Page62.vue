@@ -393,17 +393,29 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, nextTick } from 'vue';
+import { Carousel } from 'bootstrap';
 
 export default {
   setup() {
     const selectedItem = ref(''); // 保存當前選中的項目
     const showSubmenu = ref(false); // 子選單顯示/隱藏
     const submenuItems = ['L型', 'T型'];
+    const carouselRef = ref(null);
 
     // 設置預設為第一個選項 '文山區情勢'
     onMounted(() => {
       selectedItem.value = '文山區情勢';
+      nextTick(() => {
+        const carouselElement = document.querySelectorAll('.carousel');
+        carouselElement.forEach((element) => {
+          const carouselInstance = new Carousel(element, {
+            interval: false, // 停止自動輪播
+            ride: false // 禁止手動操作後重新啟動輪播
+          });
+          carouselInstance.pause(); // 強制停止輪播
+        });
+      });
     });
 
     const selectItem = (item) => {

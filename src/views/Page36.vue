@@ -61,6 +61,7 @@
 
 <script>
 import { onMounted, nextTick } from 'vue';
+import { Carousel } from 'bootstrap';  // 導入 Carousel 模組
 
 export default {
   setup() {
@@ -73,6 +74,16 @@ export default {
             content.style.opacity = 1;
           }, 100);
         }
+
+        // 停止輪播功能
+        const carouselElement = document.querySelector('#carouselExampleCaptions');
+        if (carouselElement) {
+          const carouselInstance = new Carousel(carouselElement, {
+            interval: false,  // 停止自動輪播
+            ride: false       // 禁止手動操作後重新啟動輪播
+          });
+          carouselInstance.pause();  // 強制停止輪播
+        }
       });
     };
 
@@ -81,6 +92,7 @@ export default {
     return {};
   }
 };
+
 </script>
 
 <style scoped>

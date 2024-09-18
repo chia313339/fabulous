@@ -55,11 +55,12 @@ export default {
             carouselRef.value.dispose();
           }
           try {
+            // 初始化 Carousel 並停止自動輪播
             carouselRef.value = new Carousel(carouselElement, {
-              interval: 5000,
-              wrap: true
+              interval: false, // 停止自動輪播
+              ride: false      // 禁止手動操作後重新啟動輪播
             });
-            carouselRef.value.to(0);
+            carouselRef.value.pause(); // 強制停止輪播
           } catch (error) {
             console.error('Error initializing carousel:', error);
           }
@@ -91,6 +92,7 @@ export default {
     return {};
   }
 };
+
 </script>
 
 <style scoped>
