@@ -134,6 +134,9 @@
         </transition>
       </div>
     </div>
+    <div class="footer-text">
+      工法示意圖 視覺非本案實際應用
+    </div>
   </div>
 </template>
 
@@ -318,5 +321,15 @@ ul > li:has(ul) > span::before {
   max-width: 100%;
   object-fit: contain; /* 保持影片比例 */
   position: absolute;
+}
+.footer-text {
+  position: absolute;
+  right: 10px; /* 從右邊邊緣開始 */
+  bottom: 10%; /* 從底部向上10% */
+  color: grey; /* 灰色文字 */
+  font-size: 0.7rem; /* 字體大小為0.7rem */
+  z-index: 10; /* 確保文字在最上層 */
+  /* 可選：調整文字的字型和其他樣式 */
+  font-family: Arial, sans-serif;
 }
 </style>

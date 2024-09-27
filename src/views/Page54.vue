@@ -99,6 +99,7 @@
         </transition>
       </div>
     </div>
+
   </div>
 </template>
 
@@ -264,5 +265,15 @@ li:hover, .active {
   height: 50%;
   width: auto;
   top:25%;
+}
+.footer-text {
+  position: absolute;
+  right: 10px; /* 從右邊邊緣開始 */
+  bottom: 10%; /* 從底部向上10% */
+  color: grey; /* 灰色文字 */
+  font-size: 0.7rem; /* 字體大小為0.7rem */
+  z-index: 10; /* 確保文字在最上層 */
+  /* 可選：調整文字的字型和其他樣式 */
+  font-family: Arial, sans-serif;
 }
 </style>

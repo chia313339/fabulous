@@ -20,6 +20,7 @@ import Page35 from '../views/Page35.vue';
 import Page36 from '../views/Page36.vue';
 import Page41 from '../views/Page41.vue';
 import Page42 from '../views/Page42.vue';
+import Page42_1 from '../views/Page42_1.vue';
 import Page43 from '../views/Page43.vue';
 import Page44 from '../views/Page44.vue';
 import Page50 from '../views/Page50.vue';
@@ -50,6 +51,7 @@ const routes = [
   { path: '/page35', component: Page35 },
   { path: '/page36', component: Page36 },
   { path: '/page41', component: Page41 },
+  { path: '/Page42_1', component: Page42_1 },
   { path: '/page42', component: Page42 },
   { path: '/page43', component: Page43 },
   { path: '/page44', component: Page44 },
