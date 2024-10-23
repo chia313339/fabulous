@@ -9,7 +9,7 @@
       <!-- 背景圖 -->
       <img src="/img/p51/bg.png" class="background-image" alt="Background Image" />
       <div class="centered-video" style="top:10%; left:16%; color:#930000;">
-        <span>✦結構保固20年</span>&nbsp;&nbsp;<span v-if="!['結構透視', '筏式基礎', '結構樑補強', '樓板角隅補強', '複式牆'].includes(selectedItem)" >✦將捷集團專利工法</span>
+        <span>✦結構保固20年</span>&nbsp;&nbsp;<span v-if="!['結構透視', '筏式基礎', '結構樑補強', '雙層配', '複式牆'].includes(selectedItem)" >✦將捷集團專利工法</span>
       </div>
       
       <!-- 左邊20%的巢狀清單 -->
@@ -28,7 +28,7 @@
               <li @click="selectItem('T型')" :class="{ active: selectedItem === 'T型' }">T型</li>
             </ul>
           </li>
-          <li @click="selectItem('樓板角隅補強')" :class="{ active: selectedItem === '樓板角隅補強' }">樓板角隅補強</li>
+          <li @click="selectItem('雙層配筋')" :class="{ active: selectedItem === '雙層配筋' }">雙層配筋</li>
           <li @click="selectItem('窗框補強')" :class="{ active: selectedItem === '窗框補強' }">窗框補強</li>
           <li @click="selectItem('樓板開口補強')" :class="{ active: selectedItem === '樓板開口補強' }">樓板開口補強</li>
           <li @click="selectItem('複式牆')" :class="{ active: selectedItem === '複式牆' }">複式牆</li>
@@ -54,8 +54,8 @@
             <div  v-if="selectedItem === 'T型'">
               <video src="/img/p51/T型.mp4" class="centered-video" style="max-height: 45vh; top:20%; left:40%;" controls autoplay loop></video>
             </div>
-            <div  v-if="selectedItem === '樓板角隅補強'">
-              <video src="/img/p51/樓板角隅補強.mp4" class="centered-video" style="max-height: 45vh; top:20%; left:41%;" controls autoplay loop></video>
+            <div  v-if="selectedItem === '雙層配筋'">
+              <video src="/img/p51/雙層配筋.mp4" class="centered-video" style="max-height: 45vh; top:20%; left:41%;" controls autoplay loop></video>
             </div>
             <div  v-if="selectedItem === '窗框補強'">
               <video src="/img/p51/窗框補強.mp4" class="centered-video" style="max-height: 50vh; top:18%; left:45%;" controls autoplay loop></video>

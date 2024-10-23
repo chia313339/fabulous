@@ -56,7 +56,7 @@
                   <div class="carousel-item">
                     <img src="/img/p54/櫃體002.png" class="d-block w-100" alt="...">
                   </div>
-                  <!-- <div class="carousel-item">
+                  <div class="carousel-item">
                     <img src="/img/p54/櫃體003.png" class="d-block w-100" alt="...">
                   </div>
                   <div class="carousel-item">
@@ -65,7 +65,7 @@
                   <div class="carousel-item">
                     <img src="/img/p54/櫃體005.png" class="d-block w-100" alt="...">
                   </div>
-                  <div class="carousel-item">
+                  <!-- <div class="carousel-item">
                     <img src="/img/p54/櫃體006.png" class="d-block w-100" alt="...">
                   </div>
                   <div class="carousel-item">
