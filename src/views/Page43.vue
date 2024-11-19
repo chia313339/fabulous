@@ -13,19 +13,19 @@
             <!-- 多個圓形按鈕 -->
             <div class="3f_18f"  v-if="isWithinSelectedFloors">
               <div class="circle-button" style="top: 18%; left: 18%;" @click="">B1</div>
-              <div class="circle-button" style="top: 20%; left: 27%;" @click="">B2</div>
-              <div class="circle-button" style="top: 18%; left: 34.5%;" @click="">B3</div>
+              <div class="circle-button" style="top: 20%; left: 27%;" @click="showModal('/img/p43/b2_10f.png')">B2</div>
+              <div class="circle-button" style="top: 18%; left: 34.5%;" @click="showModal('/img/p43/b3_10f.png')">B3</div>
               <div class="circle-button" style="top: 48%; left: 13%;" @click="">B7</div>
               <div class="circle-button" style="top: 54%; left: 23%;" @click="">B6</div>
-              <div class="circle-button" style="top: 54%; left: 29%;" @click="">B5</div>
-              <div class="circle-button" style="top: 48%; left: 40%;" @click="">BB</div>
+              <div class="circle-button" style="top: 54%; left: 29%;" @click="showModal('/img/p43/b5.png')">B5</div>
+              <div class="circle-button" style="top: 48%; left: 40%;" @click="showModal('/img/p43/bb_10f.png')">BB</div>
 
               <div class="circle-button" style="top: 18%; left: 64%;" @click="showModal('/img/p43/a3.png')">A3</div>
               <div class="circle-button" style="top: 20%; left: 71%;" @click="showModal('/img/p43/a2.png')">A2</div>
               <div class="circle-button" style="top: 18%; left: 80%;" @click="">A1</div>
               <div class="circle-button" style="top: 48%; left: 59%;" @click="showModal('/img/p43/aa.png')">AA</div>
               <div class="circle-button" style="top: 54%; left: 69.5%;" @click="showModal('/img/p43/a5.png')">A5</div>
-              <div class="circle-button" style="top: 54%; left: 75.5%;" @click="">A6</div>
+              <div class="circle-button" style="top: 54%; left: 75.5%;" @click="showModal('/img/p43/a6.png')">A6</div>
               <div class="circle-button" style="top: 48%; left: 85%;" @click="">A7</div>
             </div>
 
@@ -48,7 +48,7 @@
             </div>
 
             <div class="19fup"  v-if="is19fup">
-              <div class="circle-button" style="top: 18%; left: 25.5%;" @click="">B1</div>
+              <div class="circle-button" style="top: 18%; left: 25.5%;" @click="showModal('/img/p43/b1_20f.png')">B1</div>
               <div class="circle-button" style="top: 18%; left: 33%;" @click="">B2</div>
               <div class="circle-button" style="top: 49%; left: 16%;" @click="">B6</div>
               <div class="circle-button" style="top: 54%; left: 26.5%;" @click="">B5</div>
