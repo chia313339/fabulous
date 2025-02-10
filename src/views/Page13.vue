@@ -1,93 +1,58 @@
 <template>
-    <div class="fullwidthbanner-container">
-      <div class="tag-box">
-        <div class="tag">
-          <b>人文之雅 &nbsp;&nbsp; | &nbsp;&nbsp; <span>生機圖 / </span>&nbsp;<span>交通圖 / </span>&nbsp;<span>商圈 / </span>&nbsp;<span>學區 / </span></b>
-        </div>
+  <div class="fullwidthbanner-container">
+    <!-- 導覽連結區 -->
+    <div class="tag-box">
+      <div class="tag">
+        <b>
+          人文之雅 &nbsp;&nbsp; | &nbsp;&nbsp;
+          <!-- 根據 activeSlide 動態加入 .active 類別 -->
+          <span @click="goToSlide(0)" :class="{ active: activeSlide === 0 }">生機圖 / </span>&nbsp;
+          <span @click="goToSlide(1)" :class="{ active: activeSlide === 1 }">交通圖 / </span>&nbsp;
+          <span @click="goToSlide(2)" :class="{ active: activeSlide === 2 }">商圈 / </span>&nbsp;
+          <span @click="goToSlide(3)" :class="{ active: activeSlide === 3 }">學區 / </span>
+        </b>
       </div>
-      <div id="carouselExample" class="carousel slide content d-flex align-items-center justify-content-center" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="/img/p13/001.png" class="d-block w-100 carousel-img" alt="圖片1">
-            <button v-if="showButton" class="centered-button" @click="openModal()">點擊放大</button>
-          </div>
-          <div class="carousel-item">
-            <img src="/img/p13/002.png" class="d-block w-100 carousel-img" alt="圖片2">
-          </div>
-          <div class="carousel-item">
-            <img src="/img/p13/003.png" class="d-block w-100 carousel-img" alt="圖片3">
-          </div>
-          <div class="carousel-item">
-            <img src="/img/p13/004.png" class="d-block w-100 carousel-img" alt="圖片4">
-            <div v-if="showOverlayImages" class="overlay-images">
-              <img src="/img/p13/b1.png" @click="openModal('11')" alt="B1" class="overlay-img">
-              <img src="/img/p13/b2.png" @click="openModal('12')" alt="B2" class="overlay-img">
-            </div>
-          </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
-
     </div>
-  </template>
-  
-  <script>
-import { onMounted, nextTick, onBeforeUnmount, ref } from 'vue';
-import { onBeforeRouteUpdate } from 'vue-router';
-import { Carousel } from 'bootstrap';
+
+    <!-- 內容區：依據 activeSlide 顯示對應圖片 -->
+    <div class="content d-flex align-items-center justify-content-center">
+      <div v-if="activeSlide === 0" class="slide">
+        <img src="/img/p13/001.png" class="d-block w-100 carousel-img" alt="圖片1" />
+        <button class="centered-button" @click="openModal()">點擊放大</button>
+      </div>
+      <div v-else-if="activeSlide === 1" class="slide">
+        <img src="/img/p13/002.png" class="d-block w-100 carousel-img" alt="圖片2" />
+      </div>
+      <div v-else-if="activeSlide === 2" class="slide">
+        <img src="/img/p13/003.png" class="d-block w-100 carousel-img" alt="圖片3" />
+      </div>
+      <div v-else-if="activeSlide === 3" class="slide">
+        <img src="/img/p13/004.png" class="d-block w-100 carousel-img" alt="圖片4" />
+        <div class="overlay-images">
+          <img src="/img/p13/b1.png" @click="openModal('11')" alt="B1" class="overlay-img" />
+          <img src="/img/p13/b2.png" @click="openModal('12')" alt="B2" class="overlay-img" />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { ref } from 'vue';
 import Swal from 'sweetalert2';
 
 export default {
   setup() {
-    const carouselRef = ref(null);
-    const showButton = ref(true);
-    const showOverlayImages = ref(false);
+    // 使用 activeSlide 來記錄目前顯示的圖片 (0～3)
+    const activeSlide = ref(0);
     const modalImageSrc = ref('/img/p13/bigmap.webp');
 
-    const initCarousel = () => {
-      nextTick(() => {
-        const content = document.querySelector('.content');
-        if (content) {
-          content.style.opacity = 0;
-          setTimeout(() => {
-            content.style.opacity = 1;
-          }, 100);
-        }
-
-        const carouselElement = document.getElementById('carouselExample');
-        if (carouselElement) {
-          if (carouselRef.value) {
-            carouselRef.value.dispose();
-          }
-          try {
-            carouselRef.value = new Carousel(carouselElement, {
-              interval: 5000000,
-              wrap: true
-            });
-            carouselRef.value.to(0);
-
-            // 監聽輪播圖切換事件
-            carouselElement.addEventListener('slide.bs.carousel', (event) => {
-              showButton.value = event.to === 0; // 只在第一張圖片顯示按鈕
-              showOverlayImages.value = event.to === 3; // 只在第四張圖片顯示覆蓋圖片
-            });
-
-          } catch (error) {
-            console.error('Error initializing carousel:', error);
-          }
-        } else {
-          console.warn('Carousel element not found');
-        }
-      });
+    // 點擊連結後更新 activeSlide
+    const goToSlide = (index) => {
+      activeSlide.value = index;
     };
 
+    // 開啟 Swal 模態框顯示大圖
     const openModal = (imageType) => {
       if (imageType === '11') {
         modalImageSrc.value = '/img/p13/11.png';
@@ -107,136 +72,115 @@ export default {
         showConfirmButton: false,
         focusConfirm: false,
         customClass: {
-      popup: 'custom-modal-popup',
-      image: 'custom-modal-image'
-    },
+          popup: 'custom-modal-popup',
+          image: 'custom-modal-image'
+        },
         backdrop: `rgba(0,0,0,0.8)`
       });
     };
 
-    onMounted(() => {
-      nextTick(() => {
-        initCarousel();
-      });
-    });
-
-    onBeforeRouteUpdate((to, from, next) => {
-      nextTick(() => {
-        initCarousel();
-      });
-      next();
-    });
-
-    onBeforeUnmount(() => {
-      if (carouselRef.value) {
-        carouselRef.value.dispose();
-      }
-    });
-
     return {
-      openModal,
-      showButton,
-      showOverlayImages,
-      modalImageSrc
+      activeSlide,
+      goToSlide,
+      openModal
     };
   }
 };
+</script>
 
-  </script>
-  
-  <style scoped>
-  .content {
-    height: 100vh; 
-    width: 95vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    opacity: 0;
-    transition: opacity 2s ease-in-out;
-  }
-  
-  .carousel-item img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    margin: 0 auto;
-    position: relative;
-  }
-  
-  .centered-button {
-    position: absolute;
-    top: 70%;
-    right: 20%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    color: black;
-    border: 3px solid black;
-    border-radius: 50px;
-    padding: 10px 20px;
-    font-size: 1.2em;
-    font-weight: bold;
-    cursor: pointer;
-    z-index: 10;
-    animation: fadeInOut 1.5s ease-in-out infinite;
-  }
-  
-  @keyframes fadeInOut {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-  
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    background-color: rgba(141, 141, 141, 0.5);
-    border-radius: 50%;
-    padding: 10px;
-  }
-  
-  .carousel-control-prev,
-  .carousel-control-next {
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
-  }
-  
-  .overlay-images {
-    position: absolute;
-    bottom: 20%;
-    right: 30%;
-    display: flex;
-    gap: 4vw;
-  }
-  
-  .overlay-img {
-    width: 15vw;
-    height: auto;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  
-  .overlay-img:hover {
-    transform: scale(1.1);
-  }
+<style scoped>
+/* 導覽連結預設樣式 */
+.tag-box span {
+  color: #666666;
+  cursor: pointer;
+}
 
-  .custom-modal-popup {
-  width: auto; /* 覆蓋默認寬度 */
-  height: auto; /* 設定高度為 90vh */
-  max-width: 90vw; /* 設定最大高度為 90vh */
-  max-height: 90vh; /* 設定最大高度為 90vh */
-  padding: 0; /* 移除內邊距 */
-  background-color: transparent; /* 背景設置為透明 */
+/* 當滑鼠移入或連結處於 active 狀態時的樣式 */
+.tag-box span:hover,
+.tag-box .active {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+/* 其他原有樣式 */
+.fullwidthbanner-container {
+  position: relative;
+}
+
+.content {
+  height: 100vh;
+  width: 95vw;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* 確保圖片超出邊界時不顯示滾動條 */
+  overflow: hidden;
+  transition: opacity 2s ease-in-out;
+}
+
+.carousel-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.centered-button {
+  position: absolute;
+  top: 70%;
+  right: 20%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  color: black;
+  border: 3px solid black;
+  border-radius: 50px;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  animation: fadeInOut 1.5s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.overlay-images {
+  position: absolute;
+  bottom: 20%;
+  right: 30%;
+  display: flex;
+  gap: 4vw;
+}
+
+.overlay-img {
+  width: 15vw;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.overlay-img:hover {
+  transform: scale(1.1);
+}
+
+.custom-modal-popup {
+  width: auto;
+  height: auto;
+  max-width: 90vw;
+  max-height: 90vh;
+  padding: 0;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .custom-modal-image {
-  max-width: 100%; /* 圖片寬度最大100% */
-  max-height: 90vh; /* 圖片高度最大90vh */
-  object-fit: contain; /* 確保圖片覆蓋整個模態框，可能會裁剪 */
+  max-width: 100%;
+  max-height: 90vh;
+  object-fit: contain;
 }
-  
-  </style>
+</style>

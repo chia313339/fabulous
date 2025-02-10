@@ -225,6 +225,7 @@ export default {
 
 span {
   color: #666666;
+  cursor: pointer;
 }
 
 span:hover, .active {
