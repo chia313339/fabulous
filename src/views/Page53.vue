@@ -38,7 +38,7 @@
           <li @click="selectItem('當層排氣')" :class="{ active: selectedItem === '當層排氣' }">當層排氣</li>
           <li @click="selectItem('明暗管設計')" :class="{ active: selectedItem === '明暗管設計' }">明暗管設計</li>
           <li @click="selectItem('給水管採不鏽鋼接頭')" :class="{ active: selectedItem === '給水管採不鏽鋼接頭' }">給水管採不鏽鋼接頭</li>
-          <li @click="selectItem('給水管批覆')" :class="{ active: selectedItem === '給水管批覆' }">給水管批覆</li>
+          <li @click="selectItem('給水管披覆')" :class="{ active: selectedItem === '給水管披覆' }">給水管披覆</li>
           <li @click="selectItem('雙水箱系統')" :class="{ active: selectedItem === '雙水箱系統' }">雙水箱系統</li>
           <li @click="selectItem('地下室排風')" :class="{ active: selectedItem === '地下室排風' }">地下室排風</li>
         </ul>
@@ -48,7 +48,7 @@
           <li @click="selectItem('建築資訊模型BIM')" :class="{ active: selectedItem === '建築資訊模型BIM' }">建築資訊模型B.I.M.</li>
           <li @click="selectItem('影音防盜系統架構')" :class="{ active: selectedItem === '影音防盜系統架構' }">影音防盜系統架構</li>
           <li @click="selectItem('ETAG車道進出')" :class="{ active: selectedItem === 'ETAG車道進出' }">E-TAG 車道進出</li>
-          <li @click="selectItem('停車場預留電動車充電架')" :class="{ active: selectedItem === '停車場預留電動車充電架' }">停車場預留電動車充電架</li>
+          <li @click="selectItem('停車場預留電動車充電線架')" :class="{ active: selectedItem === '停車場預留電動車充電線架' }">停車場預留電動車充電線架</li>
           <li @click="selectItem('FTTH光纖到府')" :class="{ active: selectedItem === 'FTTH光纖到府' }">FTTH 光纖到府</li>
           <li @click="selectItem('雨水回收系統')" :class="{ active: selectedItem === '雨水回收系統' }">雨水回收系統</li>
         </ul>
@@ -57,7 +57,7 @@
         <ul v-if="selectedCategory === '貼心'">
           <li @click="selectItem('垃圾暫存區')" :class="{ active: selectedItem === '垃圾暫存區' }">垃圾暫存區</li>
           <li @click="selectItem('緊急供電')" :class="{ active: selectedItem === '緊急供電' }">緊急供電</li>
-          <li @click="selectItem('行動訊號強波系統')" :class="{ active: selectedItem === '行動訊號強波系統' }">行動訊號強波系統</li>
+          <li @click="selectItem('行動訊號加強系統')" :class="{ active: selectedItem === '行動訊號加強系統' }">行動訊號加強系統</li>
         </ul>
       </div>
 
@@ -115,6 +115,9 @@
             </div>
             <div  v-if="selectedItem === 'FTTH光纖到府'">
               <video src="/img/p53/光纖網路.mp4" class="centered-video" style="max-height: 50vh; top:15%; left:45%;" autoplay loop></video>
+            </div>
+            <div  v-if="selectedItem === '建築資訊模型BIM'">
+              <video src="/img/p53/BIM.mp4" class="centered-video" style="max-height: 50vh; top:20%; left:38%;" autoplay loop></video>
             </div>
           </div>
         </transition>

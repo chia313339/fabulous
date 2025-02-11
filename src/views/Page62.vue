@@ -2,7 +2,12 @@
   <div class="fullwidthbanner-container">
     <div class="tag-box">
       <div class="tag">
-        <b>區域情勢 &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; <span>區域市場</span></b>
+        <b>
+          區域情勢 &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+          <router-link to="/page61" class="tag-link unselect">軌道經濟 / </router-link>&nbsp;
+          <router-link to="/page62" class="tag-link selected">區域市場 / </router-link>&nbsp;
+          <router-link to="/page63" class="tag-link unselect">時事新聞 / </router-link>
+        </b>
       </div>
     </div>
     <div class="content">
@@ -15,8 +20,8 @@
           <li @click="selectItem('文山區情勢')" :class="{ active: selectedItem === '文山區情勢' }">文山區情勢</li>
           <li @click="selectItem('敘文山')" :class="{ active: selectedItem === '敘文山' }">敘文山</li>
           <li @click="selectItem('元利四季莊園')" :class="{ active: selectedItem === '元利四季莊園' }">元利四季莊園</li>
-          <li @click="selectItem('漢皇蒔序')" :class="{ active: selectedItem === '漢皇蒔序' }">漢皇蒔序</li>
           <li @click="selectItem('安家湛')" :class="{ active: selectedItem === '安家湛' }">安家湛</li>
+          <li @click="selectItem('漢皇蒔序')" :class="{ active: selectedItem === '漢皇蒔序' }">漢皇蒔序</li>
           <li @click="selectItem('信義富境')" :class="{ active: selectedItem === '信義富境' }">信義富境</li>
           <li @click="selectItem('國泰忠順街案')" :class="{ active: selectedItem === '國泰忠順街案' }">國泰忠順街案</li>
           <li @click="selectItem('南港東明社宅')" :class="{ active: selectedItem === '南港東明社宅' }">南港東明社宅</li>
@@ -565,5 +570,32 @@ ul > li:has(ul) > span::before {
   height: 50%;
   width: auto;
   top:25%;
+}
+
+
+.tag-box{
+  position: absolute;
+  z-index: 99;
+}
+
+/* 若想要移除預設連結樣式 */
+.tag-link {
+  /* color: inherit; */
+  text-decoration: none;
+}
+
+.selected {
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.unselect {
+  color: #666666;
+  cursor: pointer;
+}
+
+.unselect:hover {
+  color: #ffffff;
+  font-weight: bold;
 }
 </style>

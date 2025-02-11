@@ -2,7 +2,12 @@
   <div class="fullwidthbanner-container">
     <div class="tag-box">
       <div class="tag">
-        <b>區域情勢 &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; 軌道經濟</b>
+        <b>
+          區域情勢 &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+          <router-link to="/page61" class="tag-link selected">軌道經濟 / </router-link>&nbsp;
+          <router-link to="/page62" class="tag-link unselect">區域市場 / </router-link>&nbsp;
+          <router-link to="/page63" class="tag-link unselect">時事新聞 </router-link>
+        </b>
       </div>
     </div>
     <div id="carouselExample" class="carousel slide content d-flex align-items-center justify-content-center" data-bs-ride="carousel">
@@ -128,4 +133,32 @@ export default {
   width: 50px; /* 控制按钮大小 */
   height: 50px; /* 控制按钮大小 */
 }
+
+.tag-box{
+  position: absolute;
+  z-index: 99;
+}
+
+/* 若想要移除預設連結樣式 */
+.tag-link {
+  /* color: inherit; */
+  text-decoration: none;
+}
+
+.selected {
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.unselect {
+  color: #666666;
+  cursor: pointer;
+}
+
+.unselect:hover {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+
 </style>

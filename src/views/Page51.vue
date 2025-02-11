@@ -9,7 +9,7 @@
       <!-- 背景圖 -->
       <img src="/img/p51/bg.png" class="background-image" alt="Background Image" />
       <div class="centered-video" style="top:10%; left:16%; color:#930000;">
-        <span>✦結構保固20年</span>&nbsp;&nbsp;<span v-if="!['結構透視', '筏式基礎', '結構樑補強', '雙層配', '複式牆'].includes(selectedItem)" >✦將捷集團專利工法</span>
+        <span>✦結構保固20年</span>&nbsp;&nbsp;<span v-if="!['結構透視', '筏式基礎', '結構樑補強', '雙層配', '複式牆', 'SA級鋼筋續接器', '鋼筋分隔器'].includes(selectedItem)" >✦將捷集團專利工法</span>
       </div>
       
       <!-- 左邊20%的巢狀清單 -->
@@ -22,7 +22,8 @@
           <li @click="selectItem('鋼筋分隔器')" :class="{ active: selectedItem === '鋼筋分隔器' }">鋼筋分隔器</li>
           <li @click="selectItem('結構樑補強')" :class="{ active: selectedItem === '結構樑補強' }">結構樑補強</li>
           <li>
-            <span @click="toggleSubmenu" :class="{ active: isSubmenuActive || submenuItems.includes(selectedItem) }">牆定位筋結構</span>
+            <span @click="toggleSubmenu" :class="{ active: showSubmenu || submenuItems.includes(selectedItem) }">牆定位筋結構</span>
+
             <ul v-if="showSubmenu || submenuItems.includes(selectedItem)">
               <li @click="selectItem('L型')" :class="{ active: selectedItem === 'L型' }">L型</li>
               <li @click="selectItem('T型')" :class="{ active: selectedItem === 'T型' }">T型</li>
