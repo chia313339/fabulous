@@ -2,7 +2,7 @@
     <div class="fullwidthbanner-container">
       <div class="tag-box">
         <div class="tag">
-          <b>空間奇境 &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; <span>公設規劃</span></b>
+          <b>空間奇境 &nbsp;&nbsp;&nbsp; |  &nbsp;&nbsp;&nbsp; <span>公設規劃</span></b>
         </div>
       </div>
       <div class="content">
