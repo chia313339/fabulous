@@ -25,7 +25,7 @@
               <div class="circle-button" style="top: 18%; left: 80%;" @click="">A1</div>
               <div class="circle-button" style="top: 48%; left: 59%;" @click="showModal('/img/p43/aa.png')">AA</div>
               <div class="circle-button" style="top: 54%; left: 69.5%;" @click="showModal('/img/p43/a5.png')">A5</div>
-              <div class="circle-button" style="top: 54%; left: 75.5%;" @click="showModal('/img/p43/a6.png')">A6</div>
+              <div class="circle-button" style="top: 54%; left: 75.5%;" @click="">A6</div>
               <div class="circle-button" style="top: 48%; left: 85%;" @click="">A7</div>
             </div>
 
