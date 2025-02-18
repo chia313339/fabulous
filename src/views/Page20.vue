@@ -8,7 +8,7 @@
     <div class="content">
         <div class="left-container">
         <img src="/img/p20/001.png" alt="左邊圖片" class="left-image">
-        <router-link to="/page21" class="link" style="top:13%;">將捷建設</router-link>
+        <router-link to="/page21" class="link" style="top:13%;">將捷集團</router-link>
         <router-link to="/page24" class="link" style="top:29.5%;left: 33.5%;">將捷文創</router-link>
         <router-link to="/page22" class="link" style="top:25.5%;left: 67%;">林長勲 <br> 聯合建築師<br> 事務所</router-link>
         <router-link to="#" class="link" style="top:43.5%;left: 16.5%;">慈暉 <br> 文教基金會</router-link>
