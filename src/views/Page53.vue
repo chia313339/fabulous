@@ -90,13 +90,7 @@
                 </div>
             </div>
             <div  v-if="selectedItem === '吸氣閥'">
-              <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="/img/p53/吸氣閥001.png" class="d-block w-100" alt="...">
-                  </div>
-                </div>
-                </div>
+              <video src="/img/p53/吸氣閥.mp4" class="centered-video" style="max-height: 50vh; top:15%; left:40%;" autoplay loop></video>
             </div>
             <div  v-if="selectedItem === '總存水彎'">
               <video src="/img/p53/總存水彎.mp4" class="centered-video" style="max-height: 50vh; top:15%; left:40%;" autoplay loop></video>

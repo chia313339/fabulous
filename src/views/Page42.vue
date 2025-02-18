@@ -87,7 +87,7 @@ export default {
     const imageList = computed(() => {
       switch (pagetype.value) {
         case 1:
-          return ['01.png', '02.png', '03.png'];
+          return ['01.png', '02.png'];
         case 2:
           return ['01.png', '02.png', '03.png'];
         case 3:

@@ -29,6 +29,24 @@
               <div class="circle-button" style="top: 48%; left: 85%;" @click="">A7</div>
             </div>
 
+            <div class="3f"  v-if="is3f">
+              <div class="circle-button" style="top: 25%; left: 14%;" @click="">B1</div>
+              <div class="circle-button" style="top: 27%; left: 22%;" @click="showModal('/img/p43/b2_10f.png')">B2</div>
+              <div class="circle-button" style="top: 25%; left: 27.5%;" @click="showModal('/img/p43/b3_10f.png')">B3</div>
+              <div class="circle-button" style="top: 50%; left: 11%;" @click="">B7</div>
+              <div class="circle-button" style="top: 54%; left: 19%;" @click="">B6</div>
+              <div class="circle-button" style="top: 54%; left: 24%;" @click="showModal('/img/p43/b5.png')">B5</div>
+              <div class="circle-button" style="top: 50%; left: 31%;" @click="showModal('/img/p43/bb_10f.png')">BB</div>
+
+              <div class="circle-button" style="top: 25%; left: 68%;" @click="showModal('/img/p43/a3.png')">A3</div>
+              <div class="circle-button" style="top: 28%; left: 75%;" @click="showModal('/img/p43/a2.png')">A2</div>
+              <div class="circle-button" style="top: 25%; left: 82%;" @click="">A1</div>
+              <div class="circle-button" style="top: 50%; left: 65%;" @click="showModal('/img/p43/aa.png')">AA</div>
+              <div class="circle-button" style="top: 55%; left: 73.5%;" @click="showModal('/img/p43/a5.png')">A5</div>
+              <div class="circle-button" style="top: 55%; left: 78.5%;" @click="">A6</div>
+              <div class="circle-button" style="top: 50%; left: 85%;" @click="">A7</div>
+            </div>
+
             <div class="11f"  v-if="is11f">
               <div class="circle-button" style="top: 18%; left: 18%;" @click="">B1</div>
               <div class="circle-button" style="top: 20%; left: 27%;" @click="">B2</div>
@@ -139,7 +157,7 @@ export default {
     // 計算屬性，檢查當前樓層是否在3F至18F範圍內，排除 B 開頭的樓層
     const isWithinSelectedFloors = computed(() => {
       const floorNum = getFloorNumber(selectedFloor.value);
-      const allowedFloors = [3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18];
+      const allowedFloors = [4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 17, 18];
       return floorNum && allowedFloors.includes(floorNum);
     });
 
@@ -149,6 +167,14 @@ export default {
       const allowedFloors = [11];
       return floorNum && allowedFloors.includes(floorNum);
     });
+
+    // 計算屬性，檢查當前樓層是否在3F至18F範圍內，排除 B 開頭的樓層
+    const is3f = computed(() => {
+      const floorNum = getFloorNumber(selectedFloor.value);
+      const allowedFloors = [3];
+      return floorNum && allowedFloors.includes(floorNum);
+    });
+
 
     // 計算屬性，檢查當前樓層是否在19F以上
     const is19fup = computed(() => {
@@ -211,6 +237,7 @@ export default {
       is19fup,
       is11f,
       is21f,
+      is3f,
     };
   }
 };

@@ -27,8 +27,8 @@
           <li @click="selectItem('南港東明社宅')" :class="{ active: selectedItem === '南港東明社宅' }">南港東明社宅</li>
           <li @click="selectItem('松山健康社宅')" :class="{ active: selectedItem === '松山健康社宅' }">松山健康社宅</li>
           <li @click="selectItem('內湖行善社會住宅')" :class="{ active: selectedItem === '內湖行善社會住宅' }">內湖行善社會住宅</li>
-          <li @click="selectItem('國有財產署標售社區')" :class="{ active: selectedItem === '國有財產署標售社區' }">國有財產署標售社區</li>
-          <li @click="selectItem('北市財政局標租社區')" :class="{ active: selectedItem === '北市財政局標租社區' }">北市財政局標租社區</li>
+          <li @click="selectItem('國有財產署標售社區')" :class="{ active: selectedItem === '國有財產署標售社區' }">國有財產署社區</li>
+          <li @click="selectItem('北市財政局標租社區')" :class="{ active: selectedItem === '北市財政局標租社區' }">北市財政局社區</li>
           <li @click="selectItem('北市公辦都更指標個案')" :class="{ active: selectedItem === '北市公辦都更指標個案' }">北市公辦都更指標個案</li>
         </ul>
       </div>

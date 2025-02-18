@@ -9,7 +9,7 @@
       <!-- 背景圖 -->
       <img src="/img/p51/bg.png" class="background-image" alt="Background Image" />
       <div class="centered-video" style="top:10%; left:16%; color:#930000;">
-        <span>✦結構保固20年</span>&nbsp;&nbsp;<span v-if="!['結構透視', '筏式基礎', '結構樑補強', '雙層配', '複式牆', 'SA級鋼筋續接器', '鋼筋分隔器'].includes(selectedItem)" >✦將捷集團專利工法</span>
+        <span>✦結構保固20年</span>&nbsp;&nbsp;<span v-if="!['結構透視', '筏式基礎', '結構樑補強', '雙層配筋', '複式牆', 'SA級鋼筋續接器', '鋼筋分隔器'].includes(selectedItem)" >✦將捷集團專利工法</span>
       </div>
       
       <!-- 左邊20%的巢狀清單 -->

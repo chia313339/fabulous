@@ -63,7 +63,7 @@ export default {
                     subLabel: '/',
                     link: '/page20', // 不用於無 subItems 的情況
                     subItems: [
-                        { label: '將捷建設', link: '/page21' },
+                        { label: '將捷集團', link: '/page21' },
                         { label: '林長勲聯合建築師事務所', link: '/page22' },
                         { label: '忠明營造', link: '/page23' },
                         { label: '滬尾藝文園區', link: '/page24' },
