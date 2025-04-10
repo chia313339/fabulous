@@ -40,6 +40,9 @@
         </transition>
       </div>
     </div>
+    <div class="footer-text">
+      工法示意圖 視覺非本案實際應用
+    </div>
 
   </div>
 </template>

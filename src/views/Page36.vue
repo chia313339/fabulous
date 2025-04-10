@@ -2,7 +2,7 @@
   <div class="fullwidthbanner-container">
     <div class="tag-box">
       <div class="tag">
-        <b>將捷集團 &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; <span>結構工程設計</span></b>
+        <b>將捷集團 &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; <span>建築細部美學</span></b>
       </div>
     </div>
     <router-link to="/page31" class="back-arrow">

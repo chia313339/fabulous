@@ -8,14 +8,14 @@
     <div class="content">
         <div class="left-container">
         <img src="/img/p20/001.png" alt="左邊圖片" class="left-image">
-        <router-link to="/page21" class="link" style="top:13%;">將捷集團</router-link>
-        <router-link to="/page24" class="link" style="top:29.5%;left: 33.5%;">將捷文創</router-link>
-        <router-link to="/page22" class="link" style="top:25.5%;left: 67%;">林長勲 <br> 聯合建築師<br> 事務所</router-link>
-        <router-link to="#" class="link" style="top:43.5%;left: 16.5%;">慈暉 <br> 文教基金會</router-link>
-        <router-link to="/page23" class="link" style="top:47.5%;left: 83.5%;">忠明營造</router-link>
-        <router-link to="#" class="link" style="top:63%;left: 33.5%;">永捷資產管理</router-link>
-        <router-link to="#" class="link" style="top:61%;left: 67%;">捷築 <br> 整合科技</router-link>
-        <router-link to="#" class="link" style="top:79%;">結元 <br> 能源開發</router-link>
+        <router-link to="/page21" class="link" style="top:14%;">將捷集團</router-link>
+        <router-link to="/page24" class="link" style="top:30.5%;left: 33.5%;">將捷文創</router-link>
+        <router-link to="/page22" class="link" style="top:27.5%;left: 67%;">林長勲 <br> 聯合建築師<br> 事務所</router-link>
+        <router-link to="#" class="link" style="top:44.5%;left: 16.5%;">慈暉 <br> 文教基金會</router-link>
+        <router-link to="/page23" class="link" style="top:48.5%;left: 83.5%;">忠明營造</router-link>
+        <router-link to="#" class="link" style="top:64%;left: 33.5%;">永捷資產管理</router-link>
+        <router-link to="#" class="link" style="top:63%;left: 67%;">捷築 <br> 整合科技</router-link>
+        <router-link to="#" class="link" style="top:80%;">結元 <br> 能源開發</router-link>
         </div>
         <div class="right-container">
         <img src="/img/p20/002.png" alt="右邊圖片" class="right-image">
@@ -91,11 +91,12 @@ export default {
     align-items: center;  /* 垂直置中 */
     justify-content: center;  /* 水平置中 */
     text-align: center;  /* 文字在多行時仍然居中 */
+    font-size: 1vw;
 }
 
 .link:hover {
     /* background-color: rgba(255, 255, 255, 0.9); */
-    font-size: 1.1rem;
+    font-size: 1.1vw;
 }
 
 </style>

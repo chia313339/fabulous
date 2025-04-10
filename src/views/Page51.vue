@@ -40,6 +40,34 @@
         <transition name="fade">
           <div v-if="selectedItem" >
             <img :src="getImageSrc(selectedItem)" alt="Selected Image" class="centered-image" :key="selectedItem">
+            <div v-if="selectedItem === '結構透視'">
+              <!-- 按鈕容器 -->
+              <div class="build-btn-container">
+                <button
+                  class="build-btn"
+                  :class="{ active: selectbuild === '真境' }"
+                  @click="selectbuild = '真境'"
+                >
+                  真境
+                </button>
+                <br><br>
+                <button
+                  class="build-btn"
+                  :class="{ active: selectbuild === '善境' }"
+                  @click="selectbuild = '善境'"
+                >
+                  善境
+                </button>
+              </div>
+              <!-- 根據選擇顯示對應的圖片 -->
+              <div v-if="selectbuild === '真境'">
+                <img src="/img/p51/真境.png" alt="Selected Image" style="max-height: 80vh; top:5%; left:25%; position:absolute;" >
+              </div>
+              <div v-if="selectbuild === '善境'">
+                <img src="/img/p51/善境.png" alt="Selected Image" style="max-height: 80vh; top:5%; left:25%; position:absolute;" >
+              </div>
+            </div>
+
             <div  v-if="selectedItem === '筏式基礎'">
               <video src="/img/p51/筏式基礎.mp4" class="centered-video" style="max-height: 50vh; top:10%; left:35%;" autoplay loop></video>
             </div>
@@ -83,6 +111,7 @@ export default {
     const selectedItem = ref(''); // 保存當前選中的項目
     const showSubmenu = ref(false); // 子選單顯示/隱藏
     const submenuItems = ['L型', 'T型'];
+    const selectbuild = ref('真境');
 
     // 設置預設為第一個選項 '結構透視'
     onMounted(() => {
@@ -111,6 +140,7 @@ export default {
       selectItem,
       toggleSubmenu,
       getImageSrc,
+      selectbuild
     };
   }
 };
@@ -223,5 +253,32 @@ ul > li:has(ul) > span::before {
   z-index: 10; /* 確保文字在最上層 */
   /* 可選：調整文字的字型和其他樣式 */
   font-family: Arial, sans-serif;
+}
+
+.build-btn-container {
+  position: absolute;
+  top: 20%;
+  left: 18%;
+  z-index: 10;
+}
+
+.build-btn {
+  background-color: #c8ab89;
+  color: #ffffff;
+  border: none;
+  padding: 0.5em 1em;
+  margin-right: 10px;
+  font-size: 1.1vw;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.build-btn:hover {
+  transform: scale(1.07);
+}
+
+.build-btn.active {
+  background-color: #473d30; /* Active 狀態使用更深的顏色 */
 }
 </style>
