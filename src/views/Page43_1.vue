@@ -7,15 +7,13 @@
     </div>
     <div class="content">
       <div class="build-btn-container">
-        <router-link>
           <button
           class="build-btn active"
         >
           真境
         </button>
-        </router-link>
         <br><br>
-        <router-link to="Page43_2" >
+        <router-link to="/Page43_2" >
           <button
           class="build-btn"
         >

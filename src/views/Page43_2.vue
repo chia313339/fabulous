@@ -7,7 +7,7 @@
     </div>
     <div class="content">
       <div class="build-btn-container">
-        <router-link to="Page43_1" >
+        <router-link to="/Page43_1" >
           <button
           class="build-btn"
         >
@@ -15,13 +15,11 @@
         </button>
         </router-link>
         <br><br>
-        <router-link>
           <button
           class="build-btn active"
         >
           善境
         </button>
-        </router-link>
       </div>
       <div class="image-container">
         <transition name="fade" mode="out-in">
