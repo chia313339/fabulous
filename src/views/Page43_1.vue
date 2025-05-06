@@ -97,22 +97,20 @@
               <div class="circle-button" style="top: 54%; left: 75.5%;" @click="">A6</div>
               <div class="circle-button" style="top: 48%; left: 85%;" @click="">A7</div>
             </div>
-            <div class="11f"  v-if="is12f">
-              <div class="circle-button" style="top: 18%; left: 18%;" @click="">B1</div>
-              <div class="circle-button" style="top: 20%; left: 27%;" @click="showModal('/img/p43/b2_10f.png')">B2</div>
-              <div class="circle-button" style="top: 18%; left: 34.5%;" @click="showModal('/img/p43/b3_10f.png')">B3</div>
-              <div class="circle-button" style="top: 48%; left: 13%;" @click="">B7</div>
-              <div class="circle-button" style="top: 54%; left: 23%;" @click="">B6</div>
-              <div class="circle-button" style="top: 54%; left: 29%;" @click="showModal('/img/p43/b5.png')">B5</div>
-              <div class="circle-button" style="top: 48%; left: 40%;" @click="showModal('/img/p43/bb_10f.png')">BB</div>
+            <div class="19fup"  v-if="is20f">
+              <div class="circle-button" style="top: 18%; left: 25.5%;" @click="showModal('/img/p43/b1_20f.png')">B1</div>
+              <div class="circle-button" style="top: 18%; left: 33%;" @click="">B2</div>
+              <div class="circle-button" style="top: 49%; left: 16%;" @click="">B6</div>
+              <div class="circle-button" style="top: 54%; left: 26.5%;" @click="">B5</div>
+              <div class="circle-button" style="top: 54%; left: 31.5%;" @click="">BB</div>
+              <div class="circle-button" style="top: 49%; left: 42%;" @click="">B3</div>
 
-              <div class="circle-button" style="top: 18%; left: 64%;" @click="showModal('/img/p43/a3.png')">A3</div>
-              <div class="circle-button" style="top: 20%; left: 71%;" @click="showModal('/img/p43/a2.png')">A2</div>
-              <div class="circle-button" style="top: 18%; left: 80%;" @click="">A1</div>
-              <div class="circle-button" style="top: 48%; left: 59%;" @click="showModal('/img/p43/aa.png')">AA</div>
-              <div class="circle-button" style="top: 54%; left: 69.5%;" @click="showModal('/img/p43/a5.png')">A5</div>
-              <div class="circle-button" style="top: 54%; left: 75.5%;" @click="">A6</div>
-              <div class="circle-button" style="top: 48%; left: 85%;" @click="">A7</div>
+              <div class="circle-button" style="top: 18%; left: 70%;" @click="">A2</div>
+              <div class="circle-button" style="top: 18%; left: 76%;" @click="showModal('/img/p43/a1u.png')">A1</div>
+              <div class="circle-button" style="top: 49%; left: 60.5%;" @click="">A3</div>
+              <div class="circle-button" style="top: 54%; left: 70%;" @click="">AA</div>
+              <div class="circle-button" style="top: 54%; left: 75.5%;" @click="">A5</div>
+              <div class="circle-button" style="top: 49%; left: 86%;" @click="">A6</div>
             </div>
 
             <div class="19fup"  v-if="is19fup">
@@ -218,9 +216,9 @@ export default {
       return floorNum && allowedFloors.includes(floorNum);
     });
 
-    const is12f = computed(() => {
+    const is20f = computed(() => {
       const floorNum = getFloorNumber(selectedFloor.value);
-      const allowedFloors = [12];
+      const allowedFloors = [20];
       return floorNum && allowedFloors.includes(floorNum);
     });
 
@@ -242,7 +240,7 @@ export default {
     // 計算屬性，檢查當前樓層是否在19F以上
     const is19fup = computed(() => {
       const floorNum = getFloorNumber(selectedFloor.value);
-      const allowedFloors = [19, 20, 22];
+      const allowedFloors = [19, 22];
       return floorNum && allowedFloors.includes(floorNum);
     });
 
@@ -302,7 +300,7 @@ export default {
       is21f,
       is3f,
       is10f,
-      is12f,
+      is20f,
       selectbuild
     };
   }

@@ -13,7 +13,32 @@
     <div class="content">
       <div>
         <img :src="getImageSrc(selectedItem)" alt="Selected Image" class="d-block w-100 carousel-img" :key="selectedItem">
-        <button v-if="selectedItem === '001'" class="centered-button" @click="openModal">空拍大景</button>
+        
+        <!-- 真境 按鈕＋文字方塊 -->
+        <div
+          v-if="selectedItem === '001'"
+          class="button-wrapper"
+          style="top: 66%; left: 8%;"
+        >
+          <button class="centered-button" @click="openModal1">
+            真境
+          </button>
+          <div class="label-box">空拍大景</div>
+        </div>
+
+        <!-- 善境 按鈕＋文字方塊 -->
+        <div
+          v-if="selectedItem === '001'"
+          class="button-wrapper"
+          style="top: 66%; left: 23%;"
+        >
+          <button class="centered-button" @click="openModal2">
+            善境
+          </button>
+          <div class="label-box">空拍大景</div>
+        </div>
+        
+
       </div>
       <div v-show="selectedItem === '001'"  class="cloud-image">
         <img src="/img/p12/cloud.png" alt="Cloud Image" class="animated-cloud">
@@ -92,9 +117,9 @@ export default {
       });
     };
 
-    const openModal = () => {
+  const openModal1 = () => {
   const panoramaA = "https://kuula.co/share/collection/7K2KN?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1";
-  const panoramaB = "https://kuula.co/share/collection/7K2Bh?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1";
+  const panoramaB = "https://kuula.co/share/collection/7K2Bh?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1"; 
   let currentPanorama = panoramaA;
 
   Swal.fire({
@@ -146,6 +171,39 @@ export default {
   });
 };
 
+const openModal2 = () => {
+  // 單一棟全景圖網址
+  const panoramaUrl = "https://kuula.co/share/collection/7KwHN?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1";
+
+  Swal.fire({
+    title: '',                      // 清空標題
+    html: `<div class="kuula-embed" id="kuula-embed"></div>`,  // 只保留全景容器
+    width: '90%',
+    padding: '1rem',
+    background: '#fff',
+    showCloseButton: true,
+    showConfirmButton: false,
+    focusConfirm: false,
+    didOpen: () => {
+      // 產生並插入 Kuula iframe
+      const kuulaEmbed = document.getElementById('kuula-embed');
+      const iframe = document.createElement('iframe');
+      iframe.id = 'kuula-iframe';
+      iframe.width = "100%";
+      iframe.height = "640";
+      iframe.frameBorder = "0";
+      iframe.allow = "xr-spatial-tracking; gyroscope; accelerometer";
+      iframe.allowFullscreen = true;
+      iframe.scrolling = "no";
+      iframe.src = panoramaUrl;     // 指定單一棟全景圖
+      if (kuulaEmbed) {
+        kuulaEmbed.appendChild(iframe);
+      }
+    },
+  });
+};
+
+
 
     onMounted(() => {
       nextTick(() => {
@@ -167,7 +225,8 @@ export default {
     });
 
     return {
-      openModal,
+      openModal1,
+      openModal2,
       showButton,
       selectedItem,
       selectItem,
@@ -199,19 +258,54 @@ export default {
 
 .centered-button {
   position: absolute;
-  top: 75%;
-  left: 20%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  color: black;
-  border: 3px solid black;
-  border-radius: 50px; /* 圆角边框 */
-  padding: 10px 20px;
-  font-size: 1.2em;
+  background-color: #c8ab89;
+  color: #ffffff;
+  border: none;
+  padding: 10px 30px;
+  font-size: 1.5em;
   font-weight: bold; /* 粗体字 */
   cursor: pointer;
   z-index: 10; /* 确保按钮在图片上方 */
-  animation: fadeInOut 1.5s ease-in-out infinite; /* 淡入淡出效果 */
+  white-space: nowrap; 
+  transform-origin: center center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.centered-button:hover {
+  transform: scale(1.1);
+}
+
+/* 按鈕外層容器：負責絕對定位按鈕與文字方塊 */
+.button-wrapper {
+  position: absolute;
+  /* 以容器中心為參考 */
+  transform: translateX(-50%);
+  z-index: 10; /* 确保按钮在图片上方 */
+}
+
+/* 文字方塊樣式：顯示「空拍大景」 */
+.label-box {
+  position: absolute;
+  top: 50px;          /* 向下偏移，可依按鈕高度微調 */
+  left: 60px;               /* 靠右對齊按鈕 */
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  padding: 4px 8px;
+  font-size: 0.9em;
+  border-radius: 4px;
+  white-space: nowrap;    /* 單行顯示 */
+  z-index: 11; /* 确保按钮在图片上方 */
+}
+
+
+.label-box {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  padding: 4px 8px;
+  font-size: 0.9em;
+  border-radius: 4px;
+  white-space: nowrap;    /* 單行顯示 */
 }
 
 @keyframes fadeInOut {
@@ -276,5 +370,7 @@ span:hover, .active {
   opacity: 0;
   transition: opacity 2s ease, transform 3s ease;
 }
+
+
 
 </style>
