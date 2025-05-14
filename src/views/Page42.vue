@@ -93,7 +93,6 @@
 
       <!-- 右側 Carousel --------------------------------------------->
       <div class="right-panel">
-        <!-- :key 觸發重新掛載，保證切換正常 -->
         <div
           id="carouselExampleCaptions"
           class="carousel slide"
@@ -103,14 +102,27 @@
             <div
               class="carousel-item"
               :class="{ active: idx === 0 }"
-              v-for="(img, idx) in imageList"
-              :key="img"
+              v-for="(item, idx) in imageList"
+              :key="item"
             >
-              <img
-                :src="computeImgPath(img)"
-                class="d-block"
-                :alt="`Slide ${idx + 1}`"
-              />
+              <!-- 若為 .webm 則用 video 播放，否則用 img 顯示 -->
+              <template v-if="isVideo(item)">
+                <video
+                  class="d-block w-100"
+                  :src="computeMediaPath(item)"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                ></video>
+              </template>
+              <template v-else>
+                <img
+                  class="d-block"
+                  :src="computeMediaPath(item)"
+                  :alt="`Slide ${idx + 1}`"
+                />
+              </template>
             </div>
           </div>
           <!-- 左右箭頭 -->
@@ -139,8 +151,8 @@
 <script>
 /**
  * 以 Composition API 撰寫元件
- * - 重設 Carousel：觀察 pagetype / zoneType 改變後重新初始化
- * - interval:false 關閉自動輪播
+ * - 善境在最後多載入 video.webm
+ * - 模板中自動判斷 img / video
  */
 import { ref, computed, watch, nextTick, onMounted } from 'vue';
 import { Carousel } from 'bootstrap';
@@ -149,8 +161,8 @@ export default {
   name: 'Banner',
   setup() {
     /* -------------------- 反應式變數 -------------------- */
-    const pagetype = ref(0);          // 0: 首頁；1-4: 內容頁
-    const zoneType = ref('zhen');     // 'zhen' | 'shan'
+    const pagetype = ref(0);        // 0: 首頁；1-4: 內容頁
+    const zoneType = ref('zhen');   // 'zhen' | 'shan'
     const zhenCategories = ['大廳', '景觀', '車道', '公設'];
 
     /* -------------------- 分類點擊 -------------------- */
@@ -163,56 +175,52 @@ export default {
       pagetype.value = n;
     };
 
-    /* -------------------- 圖片清單 -------------------- */
+    /* -------------------- 圖片／影片清單 -------------------- */
     const imageList = computed(() => {
       if (zoneType.value === 'zhen') {
         switch (pagetype.value) {
-          case 1:
-            return ['01.png', '02.png'];
-          case 2:
-            return ['01.png', '02.png', '03.png'];
-          case 3:
-            return ['01.png'];
-          case 4:
-            return [
-              '01.png',
-              '02.png',
-              '03.png',
-              '04.png',
-              '05.png',
-              '06.png',
-              '07.png',
-            ];
-          default:
-            return [];
+          case 1: return ['01.png', '02.png'];
+          case 2: return ['01.png', '02.png', '03.png'];
+          case 3: return ['01.png'];
+          case 4: return ['01.png','02.png','03.png','04.png','05.png','06.png','07.png'];
+          default: return [];
         }
       }
-      // 善境
-      return ['101.png', '102.png', '103.png', '104.png', '105.png'];
+      // 善境：五張圖片 + 一支影片
+      return ['101.png','102.png','103.png','104.png','video.webm','105.png'];
     });
 
-    /* -------------------- 動態產生圖片路徑 -------------------- */
-    const computeImgPath = (img) =>
-      zoneType.value === 'zhen'
-        ? `/img/p42_t/${pagetype.value}${img}` // 例如 /img/p42_t/101.png
-        : `/img/p42_t/san/${img}`;            // 例如 /img/p42_t/san/101.png
+    /**
+     * 計算圖片/影片的完整路徑
+     * @param {string} filename
+     * @returns {string}
+     */
+    const computeMediaPath = (filename) => {
+      if (zoneType.value === 'zhen') {
+        return `/img/p42_t/${pagetype.value}${filename}`;
+      }
+      return `/img/p42_t/san/${filename}`;
+    };
+
+    /**
+     * 判斷是否為影片
+     * @param {string} filename
+     * @returns {boolean}
+     */
+    const isVideo = (filename) => /\.webm$/i.test(filename);
 
     /* -------------------- Carousel 重新掛載 -------------------- */
     const initCarousel = () => {
-      ['#carouselExampleIndicators', '#carouselExampleCaptions'].forEach(
-        (sel) => {
-          const el = document.querySelector(sel);
-          if (!el) return;
-          const old = Carousel.getInstance(el);
-          if (old) old.dispose();
-          new Carousel(el, { interval: false, ride: false, wrap: true });
-        },
-      );
+      ['#carouselExampleIndicators', '#carouselExampleCaptions'].forEach((sel) => {
+        const el = document.querySelector(sel);
+        if (!el) return;
+        const old = Carousel.getInstance(el);
+        if (old) old.dispose();
+        new Carousel(el, { interval: false, ride: false, wrap: true });
+      });
     };
 
     onMounted(initCarousel);
-
-    // 任何一次切換分頁／區域都重新初始化 Carousel
     watch([pagetype, zoneType], () => {
       nextTick(initCarousel);
     });
@@ -220,7 +228,6 @@ export default {
     /* key 讓 Vue 強制重新渲染 Carousel 元素 */
     const carouselKey = computed(() => `${zoneType.value}-${pagetype.value}`);
 
-    /* -------------------- 對外輸出 -------------------- */
     return {
       pagetype,
       zoneType,
@@ -228,7 +235,8 @@ export default {
       selectZhen,
       selectShan,
       imageList,
-      computeImgPath,
+      computeMediaPath,
+      isVideo,
       carouselKey,
     };
   },
@@ -290,7 +298,7 @@ body {
 
 /* ---------- 分頁內容 ---------- */
 .content0 {
-  /* 給右側內容預留 20vw 空間，與 left‑panel 寬度相同 */
+  /* 給右側內容預留 20vw 空間，與 left-panel 寬度相同 */
   margin-left: 20vw;
   height: calc(100vh - 60px);
   display: flex;
@@ -359,28 +367,38 @@ body {
   overflow: hidden; /* 防止圖片超出造成水平捲動 */
 }
 
-/* Carousel 圖片 */
+/* Carousel 內部容器 */
 .carousel-inner {
   width: 100%;
 }
-.carousel-item img {
+
+/* 圖片 & 影片 共用樣式 */
+.carousel-item img,
+.carousel-item video {
   display: block;
   margin: 0 auto;
-  max-width: 100%;  /* 關鍵：限制圖片不超出容器寬度 */
+  max-width: 100%;  /* 限制不超出容器寬度 */
   max-height: 80vh;
   height: auto;
   object-fit: contain;
 }
+
+/* Carousel 切換動畫 */
 .carousel-item {
   transition: transform 0.6s ease;
 }
 
-
+/* 自訂左右箭頭樣式 */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  background-color: rgba(141, 141, 141, 0.5); /* 白色半透明背景 */
-  border-radius: 5%; /* 圆形背景 */
-  padding: 10px; /* 内边距，让icon在背景中更居中 */
+  background-color: rgba(141, 141, 141, 0.5); /* 半透明背景 */
+  border-radius: 5%;                          /* 圓角背景 */
+  padding: 10px;                              /* 內邊距讓 icon 居中 */
 }
-</style>
 
+.carousel-item video {
+  transform: scale(0.85);             /* 縮放比率 0.8 = 原尺寸的 80% */
+  transform-origin: center center;   /* 以影片中央為縮放基準 */
+}
+
+</style>
