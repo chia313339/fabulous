@@ -39,7 +39,7 @@
             <div class="3f"  v-if="is13f">
               <div class="circle-button" style="top: 17%; left: 54.5%;" @click="showModal('/img/p43/san/a.png')">A</div>
               <div class="circle-button" style="top: 17%; left: 47%;" @click="">B</div>
-              <div class="circle-button" style="top: 17%; left: 42.5%;" @click="showModal('/img/p43/san/c.png')">C</div>
+              <div class="circle-button" style="top: 17%; left: 40.5%;" @click="showModal('/img/p43/san/13c.png')">C</div>
               <div class="circle-button" style="top: 31%; left: 42.5%;" @click="showModal('/img/p43/san/d.png')">D</div>
               <div class="circle-button" style="top: 45%; left: 43.5%;" @click="showModal('/img/p43/san/e.png')">E</div>
               <div class="circle-button" style="top: 60%; left: 46%;" @click="showModal('/img/p43/san/f.png')">F</div>
