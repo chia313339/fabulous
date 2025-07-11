@@ -29,7 +29,7 @@
             <div class="3f_18f"  v-if="isWithinSelectedFloors">
               <div class="circle-button" style="top: 17%; left: 54.5%;" @click="">A</div>
               <div class="circle-button" style="top: 17%; left: 47%;" @click="">B</div>
-              <div class="circle-button" style="top: 17%; left: 42.5%;" @click="">C</div>
+              <div class="circle-button" style="top: 17%; left: 40.5%;" @click="">C</div>
               <div class="circle-button" style="top: 31%; left: 42.5%;" @click="">D</div>
               <div class="circle-button" style="top: 45%; left: 43.5%;" @click="">E</div>
               <div class="circle-button" style="top: 60%; left: 46%;" @click="">F</div>
@@ -48,7 +48,7 @@
 
             <div class="3f"  v-if="is654f">
               <div class="circle-button" style="top: 17%; left: 48%;" @click="">B</div>
-              <div class="circle-button" style="top: 17%; left: 43.5%;" @click="">C</div>
+              <div class="circle-button" style="top: 17%; left: 41.5%;" @click="">C</div>
               <div class="circle-button" style="top: 31%; left: 43.5%;" @click="">D</div>
               <div class="circle-button" style="top: 45%; left: 44.5%;" @click="">E</div>
               <div class="circle-button" style="top: 60%; left: 47%;" @click="">F</div>
@@ -57,7 +57,7 @@
 
             <div class="3f"  v-if="is32f">
               <div class="circle-button" style="top: 19%; left: 48%;" @click="">B</div>
-              <div class="circle-button" style="top: 19%; left: 44.5%;" @click="">C</div>
+              <div class="circle-button" style="top: 19%; left: 41.5%;" @click="">C</div>
               <div class="circle-button" style="top: 33%; left: 44.5%;" @click="">D</div>
               <div class="circle-button" style="top: 47%; left: 45.5%;" @click="">E</div>
             </div>
