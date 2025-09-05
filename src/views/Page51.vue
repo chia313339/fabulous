@@ -15,23 +15,35 @@
       <!-- 左邊20%的巢狀清單 -->
       <div class="left-panel">
         <ul>
-          <li @click="selectItem('結構透視')" :class="{ active: selectedItem === '結構透視' }">結構透視</li>
-          <li @click="selectItem('筏式基礎')" :class="{ active: selectedItem === '筏式基礎' }">筏式基礎</li>
-          <li @click="selectItem('柱筋一筆箍')" :class="{ active: selectedItem === '柱筋一筆箍' }">柱筋一筆箍</li>
-          <li @click="selectItem('SA級鋼筋續接器')" :class="{ active: selectedItem === 'SA級鋼筋續接器' }">SA級鋼筋續接器</li>
-          <li @click="selectItem('鋼筋分隔器')" :class="{ active: selectedItem === '鋼筋分隔器' }">鋼筋分隔器</li>
-          <li @click="selectItem('結構樑補強')" :class="{ active: selectedItem === '結構樑補強' }">結構樑補強</li>
+          <li @click="selectItem('柱筋一筆箍')" :class="{ active: selectedItem === '柱筋一筆箍' }">
+            柱筋一筆箍
+            <span class="patent-badge">專利工法</span>
+          </li>
           <li>
-            <span @click="toggleSubmenu" :class="{ active: showSubmenu || submenuItems.includes(selectedItem) }">牆定位筋結構</span>
+            <span @click="toggleSubmenu" :class="{ active: showSubmenu || submenuItems.includes(selectedItem) }">
+              牆定位筋結構
+              <span class="patent-badge">專利工法</span>
+            </span>
 
             <ul v-if="showSubmenu || submenuItems.includes(selectedItem)">
               <li @click="selectItem('L型')" :class="{ active: selectedItem === 'L型' }">L型</li>
               <li @click="selectItem('T型')" :class="{ active: selectedItem === 'T型' }">T型</li>
             </ul>
           </li>
+          <li @click="selectItem('窗框補強')" :class="{ active: selectedItem === '窗框補強' }">
+            窗框補強
+            <span class="patent-badge">專利工法</span>
+          </li>
+          <li @click="selectItem('樓板開口補強')" :class="{ active: selectedItem === '樓板開口補強' }">
+            樓板開口補強
+            <span class="patent-badge">專利工法</span>
+          </li>
+          <li @click="selectItem('結構透視')" :class="{ active: selectedItem === '結構透視' }">結構透視</li>
+          <li @click="selectItem('筏式基礎')" :class="{ active: selectedItem === '筏式基礎' }">筏式基礎</li>
+          <li @click="selectItem('SA級鋼筋續接器')" :class="{ active: selectedItem === 'SA級鋼筋續接器' }">SA級鋼筋續接器</li>
+          <li @click="selectItem('鋼筋分隔器')" :class="{ active: selectedItem === '鋼筋分隔器' }">鋼筋分隔器</li>
+          <li @click="selectItem('結構樑補強')" :class="{ active: selectedItem === '結構樑補強' }">結構樑補強</li>
           <li @click="selectItem('雙層配筋')" :class="{ active: selectedItem === '雙層配筋' }">雙層配筋</li>
-          <li @click="selectItem('窗框補強')" :class="{ active: selectedItem === '窗框補強' }">窗框補強</li>
-          <li @click="selectItem('樓板開口補強')" :class="{ active: selectedItem === '樓板開口補強' }">樓板開口補強</li>
           <li @click="selectItem('複式牆')" :class="{ active: selectedItem === '複式牆' }">複式牆</li>
         </ul>
       </div>
@@ -73,6 +85,10 @@
             </div>
             <div  v-if="selectedItem === '柱筋一筆箍'">
               <video src="/img/p51/柱筋一筆箍.mp4" class="centered-video" style="max-height: 50vh; top:10%; left:48%;" controls autoplay loop></video>
+              <!-- 加強保護力介紹按鈕 -->
+              <button class="protection-btn" @click="openProtectionModal">
+                加強保護力介紹
+              </button>
             </div>
             <div  v-if="selectedItem === 'SA級鋼筋續接器'">
               <video src="/img/p51/鋼筋錯層續接器.mp4" class="centered-video" style="max-height: 45vh; top:20%; left:35%;" controls autoplay loop></video>
@@ -100,11 +116,31 @@
     <div class="footer-text">
       工法示意圖 視覺非本案實際應用
     </div>
+
+    <!-- 加強保護力介紹 Modal -->
+    <div v-if="showProtectionModal" class="modal-overlay" @click="closeProtectionModal">
+      <div class="modal-content" @click.stop>
+        <button class="modal-close" @click="closeProtectionModal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+          </svg>
+        </button>
+        <video 
+          src="/img/p51/人居幸福學.mp4" 
+          class="modal-video" 
+          controls 
+          autoplay
+          :style="videoStyle"
+        >
+          您的瀏覽器不支援影片播放
+        </video>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 
 export default {
   setup() {
@@ -112,10 +148,11 @@ export default {
     const showSubmenu = ref(false); // 子選單顯示/隱藏
     const submenuItems = ['L型', 'T型'];
     const selectbuild = ref('真境');
+    const showProtectionModal = ref(false); // 加強保護力介紹 modal 狀態
 
-    // 設置預設為第一個選項 '結構透視'
+    // 設置預設為第一個選項 '柱筋一筆箍'
     onMounted(() => {
-      selectedItem.value = '結構透視';
+      selectedItem.value = '柱筋一筆箍';
     });
 
     const selectItem = (item) => {
@@ -133,6 +170,49 @@ export default {
       return `/img/p51/${item}.png`; // 根據選項返回對應的圖片路徑
     };
 
+    // 打開加強保護力介紹 modal
+    const openProtectionModal = () => {
+      showProtectionModal.value = true;
+      // 防止背景滾動
+      document.body.style.overflow = 'hidden';
+    };
+
+    // 關閉加強保護力介紹 modal
+    const closeProtectionModal = () => {
+      showProtectionModal.value = false;
+      // 恢復背景滾動
+      document.body.style.overflow = '';
+    };
+
+    // 計算影片樣式，根據瀏覽器尺寸自動調整
+    const videoStyle = computed(() => {
+      const windowWidth = window.innerWidth;
+      const windowHeight = window.innerHeight;
+      
+      // 影片原始比例 672 × 1164 (約 0.577)
+      const videoAspectRatio = 672 / 1164;
+      
+      // 計算適合的尺寸，限制最大寬度
+      const maxWidth = Math.min(windowWidth * 0.5, 400); // 限制最大寬度為 400px 或視窗的 50%
+      const maxHeight = Math.min(windowHeight * 0.8, 1164);
+      
+      // 根據比例調整
+      let width = maxWidth;
+      let height = width / videoAspectRatio;
+      
+      if (height > maxHeight) {
+        height = maxHeight;
+        width = height * videoAspectRatio;
+      }
+      
+      return {
+        width: `${width}px`,
+        height: `${height}px`,
+        maxWidth: '50vw',
+        maxHeight: '80vh'
+      };
+    });
+
     return {
       selectedItem,
       showSubmenu,
@@ -140,7 +220,11 @@ export default {
       selectItem,
       toggleSubmenu,
       getImageSrc,
-      selectbuild
+      selectbuild,
+      showProtectionModal,
+      openProtectionModal,
+      closeProtectionModal,
+      videoStyle
     };
   }
 };
@@ -194,9 +278,44 @@ ul {
 li {
   cursor: pointer;
   margin: 10px 0;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
 }
 
-li:hover, .active {
+/* 有子選單的項目特殊處理 */
+li:has(ul) {
+  display: block;
+}
+
+li:has(ul) > span {
+  display: flex;
+  align-items: center;
+}
+
+/* 子選單容器 */
+ul li ul {
+  margin-top: 5px;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+/* 子選單項目恢復原本設計 */
+ul li ul li {
+  display: block;
+  white-space: normal;
+  margin: 5px 0;
+  padding-left: 20px;
+}
+
+/* 主選單項目 hover 效果 */
+li:hover, li.active {
+  color: #ff6f00;
+  font-weight: bold;
+}
+
+/* 子選單項目 hover 效果 */
+ul li ul li:hover, ul li ul li.active {
   color: #ff6f00;
   font-weight: bold;
 }
@@ -280,5 +399,131 @@ ul > li:has(ul) > span::before {
 
 .build-btn.active {
   background-color: #473d30; /* Active 狀態使用更深的顏色 */
+}
+
+/* 專利工法標記樣式 */
+.patent-badge {
+  display: inline;
+  background: linear-gradient(45deg, #ff6f00, #ff8f00);
+  color: white;
+  font-size: 0.6rem;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 8px;
+  margin-left: 6px;
+  box-shadow: 0 2px 4px rgba(255, 111, 0, 0.3);
+  animation: glow 2s ease-in-out infinite alternate;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+/* 發光動畫效果 */
+@keyframes glow {
+  from {
+    box-shadow: 0 2px 4px rgba(255, 111, 0, 0.3);
+  }
+  to {
+    box-shadow: 0 2px 8px rgba(255, 111, 0, 0.6), 0 0 12px rgba(255, 111, 0, 0.4);
+  }
+}
+
+/* 加強保護力介紹按鈕樣式 */
+.protection-btn {
+  position: absolute;
+  top: 19%;
+  right: 60%;
+  background: linear-gradient(45deg, #2E2221, #473d30);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(46, 34, 33, 0.3);
+  z-index: 10;
+}
+
+.protection-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(46, 34, 33, 0.4);
+  background: linear-gradient(45deg, #473d30, #2E2221);
+}
+
+/* Modal 樣式 */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  position: relative;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  animation: slideIn 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+  transition: background-color 0.3s ease;
+}
+
+.modal-close:hover {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-video {
+  display: block;
+  object-fit: contain;
+}
+
+/* 動畫效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 </style>

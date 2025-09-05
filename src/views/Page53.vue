@@ -33,7 +33,10 @@
           <li @click="selectItem('吸氣閥')" :class="{ active: selectedItem === '吸氣閥' }">吸氣閥</li>
           <li @click="selectItem('總存水彎')" :class="{ active: selectedItem === '總存水彎' }">總存水彎</li>
           <li @click="selectItem('排水分管')" :class="{ active: selectedItem === '排水分管' }">排水分管</li>
-          <li @click="selectItem('三樓獨立水平橫主管')" :class="{ active: selectedItem === '三樓獨立水平橫主管' }">三樓獨立水平橫主管</li>
+          <li @click="selectItem('三樓獨立水平橫主管')" :class="{ active: selectedItem === '三樓獨立水平橫主管' }">
+            三樓獨立水平橫主管
+            <span class="exclusive-badge">僅真境</span>
+          </li>
           <li @click="selectItem('後陽台排水分管')" :class="{ active: selectedItem === '後陽台排水分管' }">後陽台排水分管</li>
           <li @click="selectItem('當層排氣')" :class="{ active: selectedItem === '當層排氣' }">當層排氣</li>
           <li @click="selectItem('明暗管設計')" :class="{ active: selectedItem === '明暗管設計' }">明暗管設計</li>
@@ -47,8 +50,14 @@
         <ul v-if="selectedCategory === '科技'">
           <li @click="selectItem('建築資訊模型BIM')" :class="{ active: selectedItem === '建築資訊模型BIM' }">建築資訊模型B.I.M.</li>
           <li @click="selectItem('影音防盜系統架構')" :class="{ active: selectedItem === '影音防盜系統架構' }">影音防盜系統架構</li>
-          <li @click="selectItem('ETAG車道進出')" :class="{ active: selectedItem === 'ETAG車道進出' }">E-TAG 車道進出</li>
-          <li @click="selectItem('停車場預留電動車充電線架')" :class="{ active: selectedItem === '停車場預留電動車充電線架' }">停車場預留電動車充電線架</li>
+          <li @click="selectItem('ETAG車道進出')" :class="{ active: selectedItem === 'ETAG車道進出' }">
+            E-TAG 車道進出
+            <span class="exclusive-badge">僅真境</span>
+          </li>
+          <li @click="selectItem('停車場預留電動車充電線架')" :class="{ active: selectedItem === '停車場預留電動車充電線架' }">
+            停車場預留電動車充電線架
+            <span class="exclusive-badge">僅真境</span>
+          </li>
           <li @click="selectItem('FTTH光纖到府')" :class="{ active: selectedItem === 'FTTH光纖到府' }">FTTH 光纖到府</li>
           <li @click="selectItem('雨水回收系統')" :class="{ active: selectedItem === '雨水回收系統' }">雨水回收系統</li>
         </ul>
@@ -230,6 +239,9 @@ li {
   cursor: pointer;
   margin: 10px 0;
   font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
 }
 
 li:hover, .active {
@@ -305,6 +317,22 @@ ul > li:has(ul) > span::before {
   object-fit: contain; /* 保持影片比例 */
   position: absolute;
 }
+/* 僅真境標記樣式 */
+.exclusive-badge {
+  display: inline;
+  background: linear-gradient(45deg, #2E2221, #473d30);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 1px 4px;
+  border-radius: 6px;
+  margin-left: 6px;
+  box-shadow: 0 1px 3px rgba(46, 34, 33, 0.3);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
 .footer-text {
   position: absolute;
   right: 10px; /* 從右邊邊緣開始 */

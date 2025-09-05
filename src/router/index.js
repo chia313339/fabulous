@@ -11,6 +11,7 @@ import Page20 from '../views/Page20.vue';
 import Page21 from '../views/Page21.vue';
 import Page22 from '../views/Page22.vue';
 import Page23 from '../views/Page23.vue';
+import Page231 from '../views/Page231.vue';
 import Page24 from '../views/Page24.vue';
 import Page31 from '../views/Page31.vue';
 import Page32 from '../views/Page32.vue';
@@ -30,9 +31,12 @@ import Page51 from '../views/Page51.vue';
 import Page52 from '../views/Page52.vue';
 import Page53 from '../views/Page53.vue';
 import Page54 from '../views/Page54.vue';
+import Page55 from '../views/Page55.vue';
+import Page56 from '../views/Page56.vue';
 import Page61 from '../views/Page61.vue';
 import Page62 from '../views/Page62.vue';
 import Page63 from '../views/Page63.vue';
+import Page64 from '../views/Page64.vue';
 
 // 定義路由
 const routes = [
@@ -45,6 +49,7 @@ const routes = [
   { path: '/page21', component: Page21 },
   { path: '/page22', component: Page22 },
   { path: '/page23', component: Page23 },
+  { path: '/page231', component: Page231 },
   { path: '/page24', component: Page24 },
   { path: '/page31', component: Page31 },
   { path: '/page32', component: Page32 },
@@ -64,9 +69,12 @@ const routes = [
   { path: '/page52', component: Page52 },
   { path: '/page53', component: Page53 },
   { path: '/page54', component: Page54 },
+  { path: '/page55', component: Page55 },
+  { path: '/page56', component: Page56 },
   { path: '/page61', component: Page61 },
   { path: '/page62', component: Page62 },
   { path: '/page63', component: Page63 },
+  { path: '/page64', component: Page64 },
   // 可以添加更多的路由條目
 ];
 

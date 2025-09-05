@@ -10,9 +10,12 @@
             <ul class="navbar-nav">
                 <li 
                     class="nav-item dropup" 
-                    v-for="item in navItems" 
+                    v-for="(item, index) in navItems" 
                     :key="item.label" 
-                    :class="{ active: isActive(item) }"
+                    :class="{ 
+                        active: isActive(item),
+                        'menu-adjusted': adjustedMenus.has(index)
+                    }"
                 >
                 <router-link 
                     class="nav-link" 
@@ -46,6 +49,7 @@
 export default {
     data() {
         return {
+            adjustedMenus: new Set(), // 記錄需要調整的選單
             navItems: [
                 {
                     label: '文山畫境',
@@ -98,6 +102,8 @@ export default {
                     subLabel: '/',
                     link: '/page50', // 直接鏈接
                     subItems: [
+                        { label: 'BIM', link: '/page55' },
+                        { label: '售後服務', link: '/page56' },
                         { label: '結構工法', link: '/page51' },
                         { label: '防水工程', link: '/page52' },
                         { label: '貼心工法', link: '/page53' },
@@ -109,6 +115,7 @@ export default {
                     subLabel: '/',
                     link: '/page61', // 直接鏈接
                     subItems: [
+                        { label: '十大優勢及個案比較', link: '/page64' },
                         { label: '軌道經濟', link: '/page61' },
                         { label: '區域市場', link: '/page62' },
                         { label: '時事新聞', link: '/page63' },
@@ -117,19 +124,39 @@ export default {
             ],
         };
     },
-    methods: {
-    isActive(item) {
-        // 使用 Vue Router 的 $route.path 獲取當前路徑
-        const currentPath = this.$route.path;
-        if (item.link && item.link === currentPath) {
-            return true;
-        }
-        if (item.subItems) {
-            return item.subItems.some(subItem => subItem.link === currentPath);
-        }
-        return false;
+    mounted() {
+        this.checkMenuOverflow();
+        window.addEventListener('resize', this.checkMenuOverflow);
     },
-}
+    beforeUnmount() {
+        window.removeEventListener('resize', this.checkMenuOverflow);
+    },
+    methods: {
+        isActive(item) {
+            // 使用 Vue Router 的 $route.path 獲取當前路徑
+            const currentPath = this.$route.path;
+            if (item.link && item.link === currentPath) {
+                return true;
+            }
+            if (item.subItems) {
+                return item.subItems.some(subItem => subItem.link === currentPath);
+            }
+            return false;
+        },
+        checkMenuOverflow() {
+            this.$nextTick(() => {
+                // 簡化邏輯：只對最後兩個選單進行調整
+                this.adjustedMenus.clear();
+                const navItems = document.querySelectorAll('.nav-item');
+                
+                // 只對最後兩個選單進行調整（工學品境和區域情勢）
+                if (navItems.length >= 2) {
+                    this.adjustedMenus.add(navItems.length - 1); // 最後一個
+                    this.adjustedMenus.add(navItems.length - 2); // 倒數第二個
+                }
+            });
+        }
+    }
 
 };
 </script>
@@ -155,16 +182,18 @@ export default {
     padding: 0.5rem 1rem; /* 內距調整 */
     white-space: nowrap; /* 防止換行 */
     border: none; /* 移除邊框 */
+    max-width: calc(100vw - 60px); /* 限制最大寬度，左右各留30px */
+    overflow-x: auto; /* 如果內容超出則允許水平滾動 */
 }
 
 .navbar-nav .nav-item {
-    margin: 0 1vw; /* 設定導航項目之間的間距，可以調整此值 */
-    font-size: 1.4vw ;
+    margin: 0 0.8vw; /* 減少導航項目之間的間距 */
+    font-size: 1.2vw; /* 稍微減小字體大小 */
 }
 
 .navbar-nav .nav-link {
     transition: color 0.3s, font-weight 0.3s, font-size 0.3s;
-    font-size: 1.4vw;
+    font-size: 1.2vw;
     color: #786752; /* 平時顏色 */
 }
 
@@ -180,6 +209,15 @@ export default {
 .dropup .dropdown-menu {
     top: auto;
     bottom: 100%;
+    /* left: 50%; */
+    /* transform: translateX(-50%); 預設居中對齊 */
+}
+
+/* 動態調整的選單樣式 */
+.nav-item.menu-adjusted .dropdown-menu {
+    left: auto;
+    /* right: 10px; 距離右邊界10px */
+    transform: translateX(-50%);
 }
 
 .nav-item:hover .dropdown-menu {
@@ -225,6 +263,49 @@ export default {
     background-color: rgba(255, 255, 255, 0.0) !important; /* 設置白色半透明背景 */
     color: #030303 !important;
     font-size: calc(1vw + 1px);
+}
+
+/* 響應式設計 - 針對平板和手機 */
+@media (max-width: 1024px) {
+    .navbar-nav .nav-item {
+        margin: 0 0.5vw; /* 進一步減少間距 */
+        font-size: 1vw; /* 進一步減小字體 */
+    }
+    
+    .navbar-nav .nav-link {
+        font-size: 1vw;
+    }
+    
+    .dropdown-menu {
+        max-width: calc(100vw - 40px); /* 減少邊距 */
+        padding: 0.3rem 0.5rem; /* 減少內距 */
+    }
+    
+    .dropdown-menu .dropdown-item {
+        font-size: 0.8vw; /* 減小子選單字體 */
+        padding: 0 0.5rem; /* 減少子選單內距 */
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar-nav .nav-item {
+        margin: 0 0.3vw;
+        font-size: 0.9vw;
+    }
+    
+    .navbar-nav .nav-link {
+        font-size: 0.9vw;
+    }
+    
+    .dropdown-menu {
+        max-width: calc(100vw - 20px);
+        padding: 0.2rem 0.3rem;
+    }
+    
+    .dropdown-menu .dropdown-item {
+        font-size: 0.7vw;
+        padding: 0 0.3rem;
+    }
 }
 
 
