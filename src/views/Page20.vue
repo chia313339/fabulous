@@ -68,7 +68,7 @@ export default {
             } else {
                 // 在圖片之間循環，或回到原始內容
                 currentImageIndex.value++;
-                if (currentImageIndex.value > 2) {
+                if (currentImageIndex.value > 3) {
                     // 超過第三張圖片，回到原始內容
                     currentView.value = 'original';
                     currentImageIndex.value = 0;
@@ -86,7 +86,7 @@ export default {
 
     // 獲取當前圖片路徑的方法
     const getCurrentImageSrc = () => {
-        const imageNumbers = ['001', '002', '003'];
+        const imageNumbers = ['001', '002', '003','004'];
         return `/img/p20/fab/${imageNumbers[currentImageIndex.value]}.png`;
     };
 

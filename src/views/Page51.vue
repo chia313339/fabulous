@@ -15,6 +15,7 @@
       <!-- 左邊20%的巢狀清單 -->
       <div class="left-panel">
         <ul>
+          <li @click="selectItem('結構透視')" :class="{ active: selectedItem === '結構透視' }">結構透視</li>
           <li @click="selectItem('柱筋一筆箍')" :class="{ active: selectedItem === '柱筋一筆箍' }">
             柱筋一筆箍
             <span class="patent-badge">專利工法</span>
@@ -38,7 +39,7 @@
             樓板開口補強
             <span class="patent-badge">專利工法</span>
           </li>
-          <li @click="selectItem('結構透視')" :class="{ active: selectedItem === '結構透視' }">結構透視</li>
+          
           <li @click="selectItem('筏式基礎')" :class="{ active: selectedItem === '筏式基礎' }">筏式基礎</li>
           <li @click="selectItem('SA級鋼筋續接器')" :class="{ active: selectedItem === 'SA級鋼筋續接器' }">SA級鋼筋續接器</li>
           <li @click="selectItem('鋼筋分隔器')" :class="{ active: selectedItem === '鋼筋分隔器' }">鋼筋分隔器</li>
@@ -150,9 +151,9 @@ export default {
     const selectbuild = ref('真境');
     const showProtectionModal = ref(false); // 加強保護力介紹 modal 狀態
 
-    // 設置預設為第一個選項 '柱筋一筆箍'
+    // 設置預設為第一個選項 '結構透視'
     onMounted(() => {
-      selectedItem.value = '柱筋一筆箍';
+      selectedItem.value = '結構透視';
     });
 
     const selectItem = (item) => {

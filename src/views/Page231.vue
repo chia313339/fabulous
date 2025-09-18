@@ -48,7 +48,7 @@ import { onMounted, nextTick, ref } from 'vue';
 export default {
   setup() {
     // 按鈕數據
-    const buttons = ref(['住宅', '商辦廠辦', '公共建設', '飯店設施', '捷運共構']);
+    const buttons = ref(['住家', '商辦廠辦', '公共建設', '飯店設施', '捷運共構']);
     
     // Modal 狀態
     const showModal = ref(false);
