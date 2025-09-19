@@ -23,7 +23,6 @@
               class="d-block w-100"
               src="/img/p55/004.mp4"
               autoplay
-              muted
               playsinline
               loop
             ></video>
@@ -33,7 +32,6 @@
               class="d-block w-100"
               src="/img/p55/005.mp4"
               autoplay
-              muted
               playsinline
               loop
             ></video>
@@ -60,6 +58,7 @@ import { Carousel } from 'bootstrap';
 export default {
   setup() {
     const carouselRef = ref(null);
+    const unlockAudioOnceRef = ref(false); // 是否已解鎖音訊
 
     const initContent = () => {
       nextTick(() => {
@@ -70,6 +69,36 @@ export default {
             content.style.opacity = 1;
           }, 100);
         }
+      });
+    };
+
+    const setActiveSlideVideoState = () => {
+      // 只播放當前 active 的影片，其他全部暫停
+      const items = document.querySelectorAll('#carouselExampleIndicators .carousel-item');
+      items.forEach((item) => {
+        const video = item.querySelector('video');
+        if (video) {
+          if (item.classList.contains('active')) {
+            // 若已解鎖音訊，嘗試帶聲音播放
+            if (unlockAudioOnceRef.value) {
+              video.muted = false;
+            }
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        }
+      });
+    };
+
+    const tryUnlockAudio = () => {
+      if (unlockAudioOnceRef.value) return;
+      unlockAudioOnceRef.value = true;
+      const videos = document.querySelectorAll('#carouselExampleIndicators video');
+      videos.forEach((v) => {
+        v.muted = false;
+        // 立即嘗試播放一次，若瀏覽器允許將有聲播放
+        v.play().catch(() => {});
       });
     };
 
@@ -87,6 +116,22 @@ export default {
               ride: false      // 禁止手動操作後重新啟動輪播
             });
             carouselRef.value.pause(); // 強制停止輪播
+
+            // 初次狀態同步
+            setActiveSlideVideoState();
+
+            // 監聽輪播切換事件，確保只播放當前影片
+            carouselElement.addEventListener('slid.bs.carousel', setActiveSlideVideoState);
+
+            // 一次性互動解鎖音訊（點擊/觸控）
+            const unlockHandler = () => {
+              tryUnlockAudio();
+              setActiveSlideVideoState();
+              window.removeEventListener('click', unlockHandler);
+              window.removeEventListener('touchstart', unlockHandler);
+            };
+            window.addEventListener('click', unlockHandler, { once: true });
+            window.addEventListener('touchstart', unlockHandler, { once: true });
           } catch (error) {
             console.error('Error initializing carousel:', error);
           }
@@ -113,6 +158,10 @@ export default {
     onBeforeUnmount(() => {
       if (carouselRef.value) {
         carouselRef.value.dispose();
+      }
+      const carouselElement = document.querySelector('#carouselExampleIndicators');
+      if (carouselElement) {
+        carouselElement.removeEventListener('slid.bs.carousel', setActiveSlideVideoState);
       }
     });
 
