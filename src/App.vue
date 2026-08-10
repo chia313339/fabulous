@@ -1,6 +1,5 @@
 <template>
-  <!-- 當驗證通過後才顯示網站內容 -->
-  <div v-if="authenticated">
+  <div>
     <!-- 當寬度小於或等於 1025px 時只顯示提示訊息 -->
     <div v-if="showWarning" class="warning-message">
       請切換大螢幕獲得更好體驗
@@ -22,7 +21,6 @@ export default {
   },
   data() {
     return {
-      authenticated: false, // 驗證狀態
       showWarning: false,
     };
   },
@@ -33,18 +31,6 @@ export default {
     },
   },
   methods: {
-    authenticate() {
-      const pwd = window.prompt("請輸入密碼：");
-      // 若使用者按下取消或輸入錯誤則重新呼叫
-      if (pwd === null || pwd !== 'fabtest') {
-        alert("密碼錯誤！");
-        this.authenticate();
-      } else {
-        this.authenticated = true;
-        this.checkWindowSize();
-        window.addEventListener('resize', this.checkWindowSize);
-      }
-    },
     checkWindowSize() {
       // 當寬度小於或等於 1025px 時顯示提示訊息並禁用滾動
       this.showWarning = window.innerWidth <= 1025;
@@ -56,8 +42,8 @@ export default {
     },
   },
   mounted() {
-    // 組件掛載後呼叫密碼驗證
-    this.authenticate();
+    this.checkWindowSize();
+    window.addEventListener('resize', this.checkWindowSize);
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.checkWindowSize);
